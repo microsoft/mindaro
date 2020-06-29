@@ -1,0 +1,32 @@
+{
+  "iisSettings": {
+    "windowsAuthentication": false,
+    "anonymousAuthentication": true,
+    "iisExpress": {
+      "applicationUrl": "http://localhost:49308/",
+      "sslPort": 44355
+    }
+  },
+  "profiles": {
+    "IIS Express": {
+      "commandName": "IISExpress",
+      "launchBrowser": true,
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "app": {
+      "commandName": "Project",
+      "environmentVariables": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    "Local Process with Kubernetes": {
+      "commandName": "AzureDevSpacesLocal",
+      "launchBrowser": true,
+      "resourceGroup": "k8s",
+      "aksName": "BikeShareTest88",
+      "subscriptionId": "2d5bb2c8-8be8-4539-b48f-fbfd86852fa9"
+    }
+  }
+}

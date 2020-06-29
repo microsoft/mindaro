@@ -1,0 +1,17 @@
+{{ if .Values.hostedMongo.enabled }}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ template "databases.fullname" . }}-mongo
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  type: ClusterIP
+  ports:
+  - port: 27017
+    targetPort: 27017
+    protocol: TCP
+    name: mongo
+  selector:
+    app: {{ template "databases.fullname" . }}-mongo
+{{ end }}

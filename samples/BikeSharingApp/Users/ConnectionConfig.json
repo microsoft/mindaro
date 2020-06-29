@@ -1,0 +1,20 @@
+{
+    "config": {
+        "authentication": {
+            "type": "default",
+            "options": {
+            }
+        },
+        "options": {
+            "encrypt": true,
+            "useColumnNames": true,
+            "debug": {
+                "data": true,
+                "payload": true,
+                "token": false,
+                "packet": true,
+                "log": true
+            }
+        }
+    }
+}

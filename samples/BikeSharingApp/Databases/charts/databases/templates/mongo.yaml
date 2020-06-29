@@ -1,0 +1,36 @@
+{{ if .Values.hostedMongo.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "databases.fullname" . }}-mongo
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: 1
+  serviceName: databases-mongo
+  selector:
+    matchLabels:      
+      app: {{ template "databases.fullname" . }}-mongo
+  template:
+    metadata:
+      labels:
+        app: {{ template "databases.fullname" . }}-mongo
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ template "databases.fullname" . }}-mongo
+      containers:
+      - name: {{ .Chart.Name }}-mongo
+        image: "mongo:3.4"
+        imagePullPolicy: IfNotPresent
+        ports:
+          - containerPort: 27017
+        resources:
+          requests:
+            cpu: 100m
+            memory: 512Mi
+        volumeMounts:
+          - name: data
+            mountPath: /data/db
+{{ end }}

@@ -1,0 +1,24 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ template "populatedatabase.fullname" . }}
+spec:
+  template:
+    spec:
+      containers:
+      - name: {{ .Chart.Name }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        env:
+{{ toYaml .Values.env | indent 8 }}
+        {{- $root := . }}
+        {{- range $ref, $values := .Values.secrets }}
+        {{- range $key, $value := $values }}
+        - name: {{ $ref | upper  }}_{{ $key | upper }}
+          valueFrom:
+            secretKeyRef:
+              name: {{ template "populatedatabase.fullname" $root }}-{{ $ref | lower }}
+              key: {{ $key }}
+        {{- end }}
+        {{- end }}
+      restartPolicy: {{ .Values.restartPolicy }}
+  backoffLimit: {{ .Values.backOffLimit }}

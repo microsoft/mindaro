@@ -1,0 +1,46 @@
+{{ if .Values.hostedSql.enabled }}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ template "databases.fullname" . }}-sql
+  labels:
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+spec:
+  replicas: 1
+  serviceName: databases-sql
+  selector:
+    matchLabels:
+      app: {{ template "databases.fullname" . }}-sql
+  template:
+    metadata:
+      labels:
+        app: {{ template "databases.fullname" . }}-sql
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: {{ template "databases.fullname" . }}-sql
+      containers:
+      - name: {{ .Chart.Name }}-sql
+        image: "mcr.microsoft.com/mssql/server:2017-latest"
+        imagePullPolicy: IfNotPresent
+        env:
+          - name: MSSQL_PID
+            value: "Developer"
+          - name: ACCEPT_EULA
+            value: "Y"
+          - name: SA_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ template "databases.fullname" . }}-sql
+                key: sql-password
+        ports:
+          - containerPort: 1433
+        resources:
+          requests:
+            cpu: 400m
+            memory: 2Gi
+        volumeMounts:
+          - name: data
+            mountPath: /var/opt/mssql
+{{ end }}

@@ -1,0 +1,34 @@
+{
+  "name": "users",
+  "version": "1.0.0",
+  "description": "Management microservice for users.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "debug": "node --nolazy --inspect-brk=9229 server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/dev-spaces.git"
+  },
+  "author": "Azure Dev Spaces",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.14.0",
+    "morgan": "^1.8.0",
+    "express-api-validator": "0.1.0",
+    "body-parser": "^1.16.1",
+    "validate.js": "^0.11.1",
+    "tedious": "4.1.1",
+    "util": "0.10.3",
+    "async": "^2.1.5"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "bugs": {
+    "url": "https://github.com/Azure/dev-spaces/issues"
+  },
+  "homepage": "https://github.com/Azure/dev-spaces#readme"
+}

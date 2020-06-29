@@ -1,0 +1,3 @@
+*.tgz
+requirements.lock
+Chart.lock

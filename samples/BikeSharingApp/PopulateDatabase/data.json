@@ -1,0 +1,145 @@
+{
+    "customers": [
+      {
+        "name": "Aurelia Briggs",
+        "address": "404 E Harrison St, Seattle, WA 98102",
+        "phone": "2025550128",
+        "email": "aurelia.briggs@contoso.com",
+        "ccNumber": "1234567890123456",
+        "ccExpiry": "2022-01-01",
+        "ccccv": "1234"
+      },
+      {
+        "name": "Terrence Freeland",
+        "address": "3600 157th Ave NE, Redmond, WA 98052",
+        "phone": "2025550163",
+        "email": "terrence.freeland@contoso.com",
+        "ccNumber": "1234567890123456",
+        "ccExpiry": "2022-01-01",
+        "ccccv": "1234"
+      }
+    ],
+    "vendors": [
+      {
+        "id": "16a46619738a4865a5afcb5e18ffb138",
+        "name": "Fanny Melton",
+        "address": "100 108th Ave NE, Bellevue, WA 98004",
+        "phone": "2025550195",
+        "email": "fanny.melton@contoso.com",
+        "routingNumber": "0987",
+        "accountNumber": "6543"
+      }
+    ],
+    "bikes": [
+      {
+        "model": "Women's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "1907 18th Ave S, Seattle, WA 98144",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-01.jpg"
+      },
+      {
+        "model": "Men's Comfort",
+        "hourlyCost": 1.50,
+        "type": "tandem",
+        "address": "2100 Queen Anne Ave N, Seattle, WA 98109",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-02.jpg"
+      },
+      {
+        "model": "Men's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "8431 SE 39th St, Mercer Island, WA 98040",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-03.jpg"
+      },
+      {
+        "model": "Men's Comfort",
+        "hourlyCost": 1.50,
+        "type": "tandem",
+        "address": "3401 California Ave SW, Seattle, WA 98116",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-04.jpg"
+      },
+      {
+        "model": "Men's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "283 NW Market St, Seattle, WA 98107",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-05.jpg"
+      },
+      {
+        "model": "Girl's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "500 17th Ave, Seattle, WA 98122",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.2,
+        "maximumWeightInKg": 75,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-06.jpg"
+      },
+      {
+        "model": "Women's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "1302 Market St, Kirkland, WA 98033",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-07.jpg"
+      },
+      {
+        "model": "Women's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "8049 18th Ave NW, Seattle, WA 98117",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-08.jpg"
+      },
+      {
+        "model": "Men's Racing",
+        "hourlyCost": 2.00,
+        "type": "tandem",
+        "address": "7516 135th Ave SE, Newcastle, WA 98059",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-09.jpg"
+      },
+      {
+        "model": "Men's Cruiser",
+        "hourlyCost": 1.00,
+        "type": "tandem",
+        "address": "8638 22nd Ave SW, Seattle, WA 98106",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-10.jpg"
+      },
+      {
+        "model": "Women's Racer",
+        "hourlyCost": 2.00,
+        "type": "tandem",
+        "address": "14505 NE 91st St, Redmond, WA 98052",
+        "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
+        "suitableHeightInMeters": 1.7,
+        "maximumWeightInKg": 150,
+        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-11.jpg"
+      }
+    ]
+  }

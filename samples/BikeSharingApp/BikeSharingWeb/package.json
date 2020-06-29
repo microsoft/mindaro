@@ -1,0 +1,36 @@
+{
+  "name": "bikesharingweb",
+  "version": "1.0.0",
+  "description": "BikeSharing web app",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "isomorphic-fetch": "^2.2.1",
+    "next": "^9.3.2",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0",
+    "react-rating": "^1.6.2",
+    "react-responsive": "^6.0.1",
+    "universal-cookie": "^3.0.7"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "dev": "nodemon server.js -w server.js -w server -w universal -w next.config.js -w config.js -w package.json",
+    "export": "next export -o html",
+    "start": "next build && NODE_ENV=production node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "node --nolazy --inspect-brk=9229 server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Azure/dev-spaces.git"
+  },
+  "author": "Azure Dev Spaces",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Azure/dev-spaces/issues"
+  },
+  "homepage": "https://github.com/Azure/dev-spaces#readme"
+}

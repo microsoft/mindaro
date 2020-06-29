@@ -1,0 +1,11 @@
+.dockerignore
+.git
+.gitignore
+.vs
+.vscode
+azds.yaml
+charts
+Dockerfile
+node_modules
+secrets.dev.yaml
+values.dev.yaml

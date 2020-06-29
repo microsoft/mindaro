@@ -1,0 +1,13 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "dev-spaces.connect.service",
+			"type": "dev-spaces.connect.service",
+			"service": "bikes",
+			"ports": [
+				3000
+			]
+		}
+	]
+}
