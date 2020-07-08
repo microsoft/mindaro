@@ -2,7 +2,7 @@
  
 Local Process with Kubernetes extends the Kubernetes perimeter to your development computer allowing you to write, test, and debug microservice code while connected to your Kubernetes cluster with the rest of your application or services. With this workflow, there is no need for extra assets, such as a Dockerfile or Kubernetes manifests. You can simply run your code natively on your development workstation while connected to the Kubernetes cluster, allowing you to test your code changes in the context of the larger application.
 
-![Alt Text](https://github.com/microsoft/mindaro/raw/master/assets/lpk-graphic-new.gif)
+![Alt Text](https://github.com/microsoft/mindaro/raw/master/assets/lpk-graphic-non-isolated.gif)
 
 ### Key Features:
 
