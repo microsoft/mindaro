@@ -19,11 +19,11 @@ A clear and concise description of what you expected to happen.
  
 **Logs**
 Attach logs from the following directory:
-For Windows: %TEMP%/Azure Dev Spaces
-For OSX/Linux: $TMPDIR/Azure Dev Spaces
+For Windows: %TEMP%/Local Process with Kubernetes
+For OSX/Linux: $TMPDIR/Local Process with Kubernetes
  
 **Environment Details**
-Client used (CLI/VS Code/Visual Studio):
+Client used (VS Code/Visual Studio):
 <!-- CLI:     `azds --version`
      VS Code: `code --list-extensions --show-versions | find "azuredevspaces.azds"` 
      VS:      Visual Studio version --> 
