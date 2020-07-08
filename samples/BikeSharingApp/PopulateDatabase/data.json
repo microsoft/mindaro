@@ -39,7 +39,8 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-01.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-01.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-01.jpg"
       },
       {
         "model": "Men's Comfort",
@@ -49,7 +50,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-02.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-02.jpg"
       },
       {
         "model": "Men's Cruiser",
@@ -59,7 +60,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-03.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-03.jpg"
       },
       {
         "model": "Men's Comfort",
@@ -69,7 +70,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-04.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-04.jpg"
       },
       {
         "model": "Men's Cruiser",
@@ -79,7 +80,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-05.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-05.jpg"
       },
       {
         "model": "Girl's Cruiser",
@@ -89,7 +90,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.2,
         "maximumWeightInKg": 75,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-06.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-06.jpg"
       },
       {
         "model": "Women's Cruiser",
@@ -99,7 +100,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-07.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-07.jpg"
       },
       {
         "model": "Women's Cruiser",
@@ -109,7 +110,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-08.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-08.jpg"
       },
       {
         "model": "Men's Racing",
@@ -119,7 +120,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-09.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-09.jpg"
       },
       {
         "model": "Men's Cruiser",
@@ -129,7 +130,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-10.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-10.jpg"
       },
       {
         "model": "Women's Racer",
@@ -139,7 +140,7 @@
         "ownerUserId": "16a46619738a4865a5afcb5e18ffb138",
         "suitableHeightInMeters": 1.7,
         "maximumWeightInKg": 150,
-        "imageUrl": "https://raw.githubusercontent.com/Azure/dev-spaces/master/assets/sample-bike-11.jpg"
+        "imageUrl": "https://raw.githubusercontent.com/microsoft/mindaro/master/samples/BikeSharingApp/Assets/sample-bike-11.jpg"
       }
     ]
   }

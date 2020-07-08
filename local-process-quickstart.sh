@@ -15,10 +15,10 @@ HELMROOT=${HELMDIR}/darwin-amd64
 helpFunction()
 {
    echo ""
-   echo "Usage: $1 -g ResourceGroupName -n AKSName -r DevSpacesRepoRoot"
+   echo "Usage: $1 -g ResourceGroupName -n AKSName"
    echo -e "\t-g Name of resource group of AKS Cluster"
    echo -e "\t-n Name of AKS Cluster"
-   echo -e "\t-r Path to Root of dev spaces repo"
+   echo -e "\t-r Path to Root of the git repo"
    echo -e "\t-c Cleanup"
    exit 1 # Exit script after printing help
 }
@@ -98,7 +98,7 @@ fi
 
 if [ -z "$REPOROOT" ]
 then
-   echo "Defaulting Dev spaces repository root to current directory : ${PWD}"
+   echo "Defaulting Git repository root to current directory : ${PWD}"
    REPOROOT=$PWD
 fi
 
