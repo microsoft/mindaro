@@ -16,7 +16,6 @@ Local Process with Kubernetes extends the Kubernetes perimeter to your developme
 - Test end-to-end during development time. Select an existing service in the cluster to route to your development machine where an instance of that service is running locally. Request initiated through the frontend of the application running in Kubernetes will route between services running in the cluster until the service you specified to redirect is called. 
 
 ## Documentation
-Product documentation is hosted here:
 - [Visual Studio](https://aka.ms/localprocesswithk8s-vs)
 - [Visual Studio Code](https://aka.ms/localprocesswithk8s-vsc)
 - [How Local Process with Kubernetes Works](https://aka.ms/lpk-how-it-works)
