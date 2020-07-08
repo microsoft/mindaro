@@ -19,6 +19,7 @@ Local Process with Kubernetes extends the Kubernetes perimeter to your developme
 Product documentation is hosted here:
 - [Visual Studio](https://aka.ms/localprocesswithk8s-vs)
 - [Visual Studio Code](https://aka.ms/localprocesswithk8s-vsc)
+- [How Local Process with Kubernetes Works](https://aka.ms/lpk-how-it-works)
 
 ## Roadmap
 https://github.com/microsoft/mindaro/projects
