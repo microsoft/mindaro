@@ -11,7 +11,6 @@ namespace app
         public static HttpRequestMessage AddOutboundHeaders(this HttpRequestMessage message, HttpRequest originRequest)
         {
             message.Headers.Add(Constants.RequestIdHeaderName, OperationContext.CurrentContext.RequestId.ToString());
-            message.Headers.Add(Constants.AzdsRouteAsHeaderName, originRequest.Headers[Constants.AzdsRouteAsHeaderName].ToArray());
             message.Headers.Add(Constants.KubernetesRouteAsHeaderName, originRequest.Headers[Constants.KubernetesRouteAsHeaderName].ToArray());
             return message;
         }

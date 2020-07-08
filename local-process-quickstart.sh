@@ -9,7 +9,7 @@
 
 INGRESSNAME=bikesharing-traefik
 PIPNAME=BikeSharingPip
-HELMDIR=/var/tmp/helm_azds
+HELMDIR=/var/tmp/helm_lpk
 HELMROOT=${HELMDIR}/darwin-amd64
 
 helpFunction()

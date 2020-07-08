@@ -52,11 +52,6 @@ namespace app
         {
             Stopwatch stopWatch = Stopwatch.StartNew();
             request.Headers.Add(Constants.RequestIdHeaderName, requestId.ToString());
-            if (originRequest.Headers.ContainsKey(Constants.AzdsRouteAsHeaderName))
-            {
-                request.Headers.Add(Constants.AzdsRouteAsHeaderName, originRequest.Headers[Constants.AzdsRouteAsHeaderName].ToArray());
-            }
-
             if (originRequest.Headers.ContainsKey(Constants.KubernetesRouteAsHeaderName))
             {
                 request.Headers.Add(Constants.KubernetesRouteAsHeaderName, originRequest.Headers[Constants.KubernetesRouteAsHeaderName].ToArray());

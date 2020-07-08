@@ -3,7 +3,6 @@
 .gitignore
 .vs
 .vscode
-azds.yaml
 charts
 Dockerfile
 node_modules

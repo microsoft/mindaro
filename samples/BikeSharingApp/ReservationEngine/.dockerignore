@@ -4,7 +4,6 @@
 .vs
 .vscode
 **/*.*proj.user
-**/azds.yaml
 **/bin
 **/charts
 **/Dockerfile
