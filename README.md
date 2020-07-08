@@ -4,6 +4,10 @@ Local Process with Kubernetes extends the Kubernetes perimeter to your developme
 # Purpose of this repository
 This source repository primarily hosts *code samples* to support product guides, discussion of bugs/feature requests, as well as provide high-level insight into our product roadmap.
 
+## Roadmap
+https://github.com/microsoft/mindaro/projects
+
+# Documentation
 Product documentation is hosted here:
 [Visual Studio](https://aka.ms/localprocesswithk8s-vs) ,
 [Visual Studio Code](https://aka.ms/localprocesswithk8s-vsc)
