@@ -27,7 +27,7 @@ probes:
 ingress:
   enabled: true
   annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
+    kubernetes.io/ingress.class: traefik
   path: /
   hosts:
     - dev.bikesharingweb.<REPLACE_ME_WITH_HOST_SUFFIX>

@@ -36,7 +36,7 @@ probes:
 ingress:
   enabled: false
   annotations:
-    kubernetes.io/ingress.class: addon-http-application-routing
+    kubernetes.io/ingress.class: traefik
   path: /
   # hosts:
   #   - chart-example.local
