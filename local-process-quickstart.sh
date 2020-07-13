@@ -101,9 +101,6 @@ installHelmFunction
 echo "Setting the Kube context to $AKSNAME in $RGNAME"
 az aks get-credentials -g $RGNAME -n $AKSNAME
 
-#echo "Create namespace dev"
-#kubectl create namespace dev
-
 # Use Helm to deploy a traefik ingress controller
 echo "helm repo add && helm repo update"
 $HELMDIR/helm repo add stable https://kubernetes-charts.storage.googleapis.com/
