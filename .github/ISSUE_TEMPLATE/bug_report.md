@@ -24,8 +24,7 @@ For OSX/Linux: $TMPDIR/Local Process with Kubernetes
  
 **Environment Details**
 Client used (VS Code/Visual Studio):
-<!-- CLI:     `azds --version`
-     VS Code: `code --list-extensions --show-versions | find "mindaro.mindaro"` 
+<!-- VS Code: `code --list-extensions --show-versions | find "mindaro.mindaro"` 
      VS:      Visual Studio version --> 
 Client's version:
 Operating System:
