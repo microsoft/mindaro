@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "debug": "node --nolazy --inspect-brk=9229 server.js"
+    "debug": "node --nolazy server.js"
   },
   "repository": {
     "type": "git",

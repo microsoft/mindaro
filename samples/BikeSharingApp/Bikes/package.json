@@ -14,6 +14,6 @@
     "nodemon": "^1.18.10"
   },
   "scripts": {
-    "debug": "node --nolazy --inspect-brk=9229 server.js"
+    "debug": "node --nolazy server.js"
   }
 }
