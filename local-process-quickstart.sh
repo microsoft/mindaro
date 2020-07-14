@@ -29,6 +29,7 @@ helpFunction()
    echo "Usage: $1 -g ResourceGroupName -n AKSName"
    echo -e "\t-g Name of resource group of AKS Cluster"
    echo -e "\t-n Name of AKS Cluster"
+   echo -e "\t-k Kubernetes namespace (default = bikeapp)"
    echo -e "\t-r Path to Root of the git repo (default = pwd)"
    echo -e "\t-c Cleanup"
    echo -e "\t-d Helm Debug switch"
@@ -71,22 +72,23 @@ cleanupFunction()
    exit 0
 }
 
-while getopts "g:n:rcd" opt; do
+while getopts "g:n:r:k:cd" opt; do
    case "$opt" in
       c ) CLEANUP="true"  ;;
       g ) RGNAME="$OPTARG"  ;;
       n ) AKSNAME="$OPTARG"  ;;
       r ) REPOROOT="$OPTARG"  ;;
       d ) HELMARGS=" --debug" ;;
+      k ) BIKENS="$OPTARG" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
 
-
 if [ -z "$BIKENS" ]; then
-   echo "Defaulting Kubernetes Namespace to: bikeapp"
    BIKENS="bikeapp"
 fi
+BIKENS=$(echo $BIKENS | tr [:upper:] [:lower:])
+echo "Using kubernetes namespace: $BIKENS"
 
 # Print helpFunction in case parameters are empty
 if [ ! -z "$CLEANUP" ]; then
