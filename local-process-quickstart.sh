@@ -11,13 +11,25 @@ set -e
 HELMDIR=/var/tmp/helm_lpk
 INGRESSNAME=bikesharing-traefik
 
+echo ""
+echo "Local Process for Kubernetes"
+echo "Bike Sample App - Quickstart script"
+echo "-----------------------------------"
+echo ""
+if [ "$OSTYPE" == "msys" ]; then
+   echo "The script is currently only supported in Windows using WSL. https://aka.ms/wsl"  
+   echo "Alternatively you can use the Azure Cloud Shell https://shell.azure.com (bash)"
+   
+   exit 1
+fi
+
 helpFunction()
 {
    echo ""
    echo "Usage: $1 -g ResourceGroupName -n AKSName"
    echo -e "\t-g Name of resource group of AKS Cluster"
    echo -e "\t-n Name of AKS Cluster"
-   echo -e "\t-r Path to Root of the git repo"
+   echo -e "\t-r Path to Root of the git repo (default = pwd)"
    echo -e "\t-c Cleanup"
    echo -e "\t-d Helm Debug switch"
    exit 1 # Exit script after printing help
@@ -48,18 +60,18 @@ cleanupFunction()
    echo ""
    echo "Setting the Kube context to $AKSNAME in $RGNAME"
    az aks get-credentials -g $RGNAME -n $AKSNAME
-   $HELMDIR/helm --namespace dev uninstall bikesharingapp
-   $HELMDIR/helm --namespace dev uninstall $INGRESSNAME
-   echo "Delete namespace dev? (Y/n) : "
+   $HELMDIR/helm --namespace $BIKENS uninstall bikesharingapp
+   $HELMDIR/helm --namespace $BIKENS uninstall $INGRESSNAME
+   echo "Delete namespace $BIKENS? (Y/n) : "
    read RESPONSE
    if [ "$RESPONSE" == "y" ] || [ "$RESPONSE" == "Y" ]; then
-      kubectl delete namespace dev
+      kubectl delete namespace $BIKENS
    fi
    rm -rf $HELMDIR
    exit 0
 }
 
-while getopts "g:n:r:cd" opt; do
+while getopts "g:n:rcd" opt; do
    case "$opt" in
       c ) CLEANUP="true"  ;;
       g ) RGNAME="$OPTARG"  ;;
@@ -70,8 +82,17 @@ while getopts "g:n:r:cd" opt; do
    esac
 done
 
+
+if [ -z "$BIKENS" ]; then
+   echo "Defaulting Kubernetes Namespace to: bikeapp"
+   BIKENS="bikeapp"
+fi
+BIKENS=${BIKENS,,}
+
 # Print helpFunction in case parameters are empty
 if [ ! -z "$CLEANUP" ]; then
+   echo ""
+   echo "Running app Cleanup"
    if [ -z "$RGNAME" ]; then
       echo "Please pass -g when calling -c"
       helpFunction
@@ -84,7 +105,7 @@ elif [ -z "$RGNAME" ] || [ -z "$AKSNAME" ]; then
 fi
 
 if [ -z "$REPOROOT" ]; then
-   echo "Defaulting Git repository root to current directory : $PWD"
+   echo "Defaulting Git repository root to current directory: $PWD"
    REPOROOT="$PWD"
 fi
 
@@ -105,19 +126,22 @@ az aks get-credentials -g $RGNAME -n $AKSNAME
 echo "helm repo add && helm repo update"
 $HELMDIR/helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 $HELMDIR/helm repo update
-echo "helm install traefik ingress controller $HELMARGS"
+
+echo ""
+echo "helm install traefik ingress controller in $BIKENS $HELMARGS"
 $HELMDIR/helm install $INGRESSNAME stable/traefik \
-   --namespace dev --create-namespace \
+   --namespace $BIKENS --create-namespace \
    --set kubernetes.ingressClass=traefik \
    --set fullnameOverride=$INGRESSNAME \
    --set rbac.enabled=true \
    --set kubernetes.ingressEndpoint.useDefaultPublishedService=true \
    --version 1.85.0 $HELMARGS
 
+echo ""
 echo "Waiting for BikeSharing ingress Public IP to be assigned..."
 while [ -z "$PUBLICIP" ]; do
   sleep 5
-  PUBLICIP=$(kubectl get svc -n dev $INGRESSNAME -o jsonpath={.status.loadBalancer.ingress[0].ip})
+  PUBLICIP=$(kubectl get svc -n $BIKENS $INGRESSNAME -o jsonpath={.status.loadBalancer.ingress[0].ip})
 done
 echo ""
 echo "BikeSharing ingress Public IP: " $PUBLICIP
@@ -129,18 +153,20 @@ CHARTDIR="$REPOROOT/samples/BikeSharingApp/charts/"
 echo "---"
 echo "Chart directory: $CHARTDIR"
 
-echo "helm install bikesharingapp"
+
+
+echo "helm install bikesharingapp (average time to install = 4 minutes)"
 $HELMDIR/helm install bikesharingapp "$CHARTDIR" \
-   --set bikesharingweb.ingress.hosts={dev.bikesharingweb.$NIPIOFQDN} \
-   --set gateway.ingress.hosts={dev.gateway.$NIPIOFQDN} \
+   --set bikesharingweb.ingress.hosts={$BIKENS.bikesharingweb.$NIPIOFQDN} \
+   --set gateway.ingress.hosts={$BIKENS.gateway.$NIPIOFQDN} \
    --set bikesharingweb.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
    --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
    --dependency-update \
-   --namespace dev \
+   --namespace $BIKENS \
    --atomic $HELMARGS
 
 echo ""
 echo "To try out the app, open the url:"
-kubectl -n dev get ing bikesharingweb -o jsonpath='{.spec.rules[0].host}'
+kubectl -n $BIKENS get ing bikesharingweb -o jsonpath='{.spec.rules[0].host}'
 echo ""
 
