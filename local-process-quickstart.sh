@@ -87,7 +87,6 @@ if [ -z "$BIKENS" ]; then
    echo "Defaulting Kubernetes Namespace to: bikeapp"
    BIKENS="bikeapp"
 fi
-BIKENS=${BIKENS,,}
 
 # Print helpFunction in case parameters are empty
 if [ ! -z "$CLEANUP" ]; then
