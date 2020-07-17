@@ -9,7 +9,7 @@ namespace app
 
         public const string BikesMicroserviceEnv = "bikes_dnsname";
 
-        public const string ReservationsMicroserviceEnv = "reservation_dnsname";
+        public const string ReservationMicroserviceEnv = "reservation_dnsname";
 
         public const string ReservationEngineMicroserviceEnv = "reservationengine_dnsname";
 

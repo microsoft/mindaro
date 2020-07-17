@@ -21,7 +21,7 @@ namespace app.Controllers
     {
         private CustomConfiguration _customConfiguration { get; set; }
 
-        private string _reservationsService { get; set; }
+        private string _reservationService { get; set; }
 
         private string _reservationEngineService { get; set; }
 
@@ -36,7 +36,7 @@ namespace app.Controllers
         public ReservationController(IOptions<CustomConfiguration> customConfiguration)
         {
             _customConfiguration = customConfiguration.Value;
-            _reservationsService = Environment.GetEnvironmentVariable(Constants.ReservationsMicroserviceEnv) ?? _customConfiguration.Services.Reservations;
+            _reservationService = Environment.GetEnvironmentVariable(Constants.ReservationMicroserviceEnv) ?? _customConfiguration.Services.Reservation;
             _reservationEngineService = Environment.GetEnvironmentVariable(Constants.ReservationEngineMicroserviceEnv) ?? _customConfiguration.Services.ReservationEngine;
             _billingService = Environment.GetEnvironmentVariable(Constants.BillingMicroserviceEnv) ?? _customConfiguration.Services.Billing;
             _bikesService = Environment.GetEnvironmentVariable(Constants.BikesMicroserviceEnv) ?? _customConfiguration.Services.Bikes;
@@ -92,7 +92,7 @@ namespace app.Controllers
         [HttpGet("{reservationId}")]
         public async Task<IActionResult> GetReservation(string reservationId)
         {
-            string getReservationUrl = $"http://{_reservationsService}/api/reservation/{reservationId}";
+            string getReservationUrl = $"http://{_reservationService}/api/reservation/{reservationId}";
             var response = await HttpHelper.GetAsync(getReservationUrl, this.Request);
             if (!response.IsSuccessStatusCode)
             {
@@ -112,7 +112,7 @@ namespace app.Controllers
         [HttpGet("allReservations")]
         public async Task<IActionResult> GetAllReservations()
         {
-            string getAllReservationsUrl = $"http://{_reservationsService}/api/allReservations";
+            string getAllReservationsUrl = $"http://{_reservationService}/api/allReservations";
             var response = await HttpHelper.GetAsync(getAllReservationsUrl, this.Request);
             if (!response.IsSuccessStatusCode)
             {
@@ -133,7 +133,7 @@ namespace app.Controllers
 
         private async Task<IActionResult> _CreateNewReservationAsync(Reservation reservationDetails)
         {
-            string addReservationUrl = $"http://{_reservationsService}/api/reservation";
+            string addReservationUrl = $"http://{_reservationService}/api/reservation";
             var response = await HttpHelper.PostAsync(addReservationUrl, new StringContent(
                 JsonConvert.SerializeObject(reservationDetails), Encoding.UTF8, "application/json"), this.Request);
             if (response.IsSuccessStatusCode)
@@ -238,7 +238,7 @@ namespace app.Controllers
         {
             try
             {
-                string getReservationUrl = $"http://{_reservationsService}/api/reservation/{reservationId}";
+                string getReservationUrl = $"http://{_reservationService}/api/reservation/{reservationId}";
                 var response = await HttpHelper.GetAsync(getReservationUrl, this.Request);
                 if (response.IsSuccessStatusCode)
                 {
