@@ -5,7 +5,7 @@ fullnameOverride: gateway
 replicaCount: 1
 image:
   repository: azdspublic/bikesharing-gateway
-  tag: build.20200619.1
+  tag: build.20200629.1
   pullPolicy: IfNotPresent
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
