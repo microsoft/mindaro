@@ -9,7 +9,7 @@ namespace app
 
         public string Bikes { get; set; }
 
-        public string Reservations { get; set; }
+        public string Reservation { get; set; }
 
         public string ReservationEngine { get; set; }
 

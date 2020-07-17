@@ -20,7 +20,7 @@ namespace app.Controllers
     {
         private string _usersService { get; set; }
 
-        private string _reservationsService { get; set; }
+        private string _reservationService { get; set; }
 
         private string _bikesService { get; set; }
 
@@ -32,7 +32,7 @@ namespace app.Controllers
         {
             _customConfiguration = customConfiguration.Value;
             _usersService = Environment.GetEnvironmentVariable(Constants.UsersMicroserviceEnv) ?? _customConfiguration.Services.Users;
-            _reservationsService = Environment.GetEnvironmentVariable(Constants.ReservationsMicroserviceEnv) ?? _customConfiguration.Services.Reservations;
+            _reservationService = Environment.GetEnvironmentVariable(Constants.ReservationMicroserviceEnv) ?? _customConfiguration.Services.Reservation;
             _billingService = Environment.GetEnvironmentVariable(Constants.BillingMicroserviceEnv) ?? _customConfiguration.Services.Billing;
             _bikesService = Environment.GetEnvironmentVariable(Constants.BikesMicroserviceEnv) ?? _customConfiguration.Services.Bikes;
         }
@@ -456,7 +456,7 @@ namespace app.Controllers
                 };
             }
 
-            string listReservationsUrl = $"http://{_reservationsService}/api/user/{userId}/reservations";
+            string listReservationsUrl = $"http://{_reservationService}/api/user/{userId}/reservations";
             var response = await HttpHelper.GetAsync(listReservationsUrl, this.Request);
             if (response.IsSuccessStatusCode)
             {
