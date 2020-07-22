@@ -65,7 +65,10 @@ export default class Index extends Component {
             var url = this.apiHost + '/api/bike/availableBikes';
             const res = await fetch(url);
             const bikes = await res.json();
-            this.setState({ bikes: bikes });
+            this.setState({
+                isLoaded: true,
+                bikes: bikes
+            });
             console.log(bikes);
         }
         catch (error) {

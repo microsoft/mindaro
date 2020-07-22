@@ -26,7 +26,8 @@ class PreviewBase extends Component {
             userName: undefined,
             bike: {},
             vendor: {},
-            errorMessage: undefined
+            errorMessage: undefined,
+            isLoaded: false
         };
     }
 
@@ -78,6 +79,7 @@ class PreviewBase extends Component {
         }
 
         this.setState({
+            isLoaded: true,
             vendor: vendorData
         });
     }
@@ -149,7 +151,7 @@ class PreviewBase extends Component {
 
                                 <MediaQuery minWidth={600}>
                                     <div className="divider">
-                                        <FormButton primary onClick={this.handleClick.bind(this)}>Rent bike</FormButton>
+                                        <FormButton primary disabled={!this.state.isLoaded} disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Rent bike</FormButton>
                                         <FormNote text="*You won't be charged until you return the bike" />
                                     </div>
                                 </MediaQuery>
@@ -163,7 +165,7 @@ class PreviewBase extends Component {
                 </Content>
                 <MediaQuery maxWidth={600}>
                     <Footer>
-                        <FormButton primary onClick={this.handleClick.bind(this)}>Rent bike</FormButton>
+                        <FormButton primary disabled={!this.state.isLoaded} disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Rent bike</FormButton>
                         <FormNote text="*You won't be charged until you return the bike" />
                     </Footer>
                 </MediaQuery>

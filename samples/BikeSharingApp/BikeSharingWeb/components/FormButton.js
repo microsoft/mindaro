@@ -12,7 +12,14 @@ export default class FormButton extends Component {
     render() {
         return (
             <div>
-                <button type="button" className={"btn " + (this.props.primary ? 'primary' : '')} onClick={() => this.props.onClick()}>{this.props.children}</button>
+                <button
+                    type="button"
+                    className={"btn " + (this.props.primary ? 'primary' : '')}
+                    onClick={() => this.props.onClick()}
+                    disabled={this.props.disabled} // The button is disabled by default. Once all of a page's data loads, we enable the button using `this.state.isLoaded`.
+                >
+                    {this.props.children}
+                </button>
                 <style jsx>{`
                     .btn {
                         background-color: #688379;

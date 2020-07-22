@@ -25,7 +25,8 @@ export default class CompleteReturn extends Component {
             reservation: {},
             bike: {},
             invoice: {},
-            errorMessage: undefined
+            errorMessage: undefined,
+            isLoaded: false
         };
     }
 
@@ -99,6 +100,7 @@ export default class CompleteReturn extends Component {
         }
 
         this.setState({
+            isLoaded: true,
             invoice: invoice
         });
     }
@@ -132,7 +134,7 @@ export default class CompleteReturn extends Component {
                         </div>
                         <MediaQuery minWidth={600}>
                             <div className="divider">
-                                <FormButton primary onClick={this.handleClick.bind(this)}>Confirm return</FormButton>
+                                <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Confirm return</FormButton>
                             </div>
                         </MediaQuery>
                     </div>
@@ -140,7 +142,7 @@ export default class CompleteReturn extends Component {
                 </Content>
                 <MediaQuery maxWidth={600}>
                     <Footer>
-                        <FormButton primary onClick={this.handleClick.bind(this)}>Confirm return</FormButton>
+                        <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Confirm return</FormButton>
                     </Footer>
                 </MediaQuery>
                 <style jsx>{`

@@ -17,7 +17,8 @@ export default class DevSignin extends Component {
         super(props);
         this.state = {
             users: [],
-            errorMessage: undefined
+            errorMessage: undefined,
+            isLoaded: false
         };
     }
 
@@ -40,7 +41,10 @@ export default class DevSignin extends Component {
                 return;
             }
 
-            this.setState({users: users});
+            this.setState({
+                isLoaded: true,
+                users: users
+            });
         }
         catch (error) {
             console.error(error);
