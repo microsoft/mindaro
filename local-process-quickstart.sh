@@ -63,7 +63,7 @@ cleanupFunction()
    az aks get-credentials -g $RGNAME -n $AKSNAME
    $HELMDIR/helm --namespace $BIKENS uninstall bikesharingapp
    $HELMDIR/helm --namespace $BIKENS uninstall $INGRESSNAME
-   echo "Delete namespace $BIKENS? (Y/n) : "
+   echo "Delete namespace $BIKENS? (Y/n): "
    read RESPONSE
    if [ "$RESPONSE" == "y" ] || [ "$RESPONSE" == "Y" ]; then
       kubectl delete namespace $BIKENS
@@ -130,7 +130,7 @@ $HELMDIR/helm repo update
 
 echo ""
 echo "helm install traefik ingress controller in $BIKENS $HELMARGS"
-$HELMDIR/helm install $INGRESSNAME stable/traefik \
+$HELMDIR/helm install "$INGRESSNAME-$BIKENS" stable/traefik \
    --namespace $BIKENS --create-namespace \
    --set kubernetes.ingressClass=traefik \
    --set fullnameOverride=$INGRESSNAME \
@@ -164,6 +164,7 @@ $HELMDIR/helm install bikesharingapp "$CHARTDIR" \
    --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
    --dependency-update \
    --namespace $BIKENS \
+   --timeout 9m \
    --atomic $HELMARGS
 
 echo ""
