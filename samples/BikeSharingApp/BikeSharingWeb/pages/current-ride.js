@@ -27,7 +27,8 @@ class CurrentRideBase extends Component {
             reservation: {},
             bike: {},
             vendor: {},
-            errorMessage: undefined
+            errorMessage: undefined,
+            isLoaded: false
         };
       }
 
@@ -101,6 +102,7 @@ class CurrentRideBase extends Component {
         }
 
         this.setState({
+            isLoaded: true,
             vendor: vendor
         });
     }
@@ -165,7 +167,7 @@ class CurrentRideBase extends Component {
                                 <Field label="Pick-up/return address" value={this.state.bike.address} />
                                 <MediaQuery minWidth={600}>
                                     <div className="divider">
-                                        <FormButton primary onClick={this.handleClick.bind(this)}>Return bike</FormButton>
+                                        <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Return bike</FormButton>
                                     </div>
                                 </MediaQuery>
                             </div>
@@ -178,7 +180,7 @@ class CurrentRideBase extends Component {
                 </Content>
                 <MediaQuery maxWidth={600}>
                     <Footer>
-                        <FormButton primary onClick={this.handleClick.bind(this)}>Return bike</FormButton>
+                        <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Return bike</FormButton>
                     </Footer>
                 </MediaQuery>
                 <style jsx>{`

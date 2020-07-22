@@ -19,7 +19,8 @@ export default class Review extends Component {
         super(props);
         this.state = {
             userName: undefined,
-            errorMessage: undefined
+            errorMessage: undefined,
+            isLoaded: false
         };
     }
 
@@ -40,6 +41,7 @@ export default class Review extends Component {
         }
 
         this.setState({
+            isLoaded: true,
             userName: user.name
         });
     }
@@ -72,7 +74,7 @@ export default class Review extends Component {
 
                         <MediaQuery minWidth={600}>
                             <div className="divider">
-                                <FormButton primary onClick={this.handleClick.bind(this)}>Submit</FormButton>
+                                <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Submit</FormButton>
                             </div>
                         </MediaQuery>
                     </div>
@@ -80,7 +82,7 @@ export default class Review extends Component {
                 </Content>
                 <MediaQuery maxWidth={600}>
                     <Footer>
-                        <FormButton primary onClick={this.handleClick.bind(this)}>Submit</FormButton>
+                        <FormButton primary disabled={!this.state.isLoaded} onClick={this.handleClick.bind(this)}>Submit</FormButton>
                     </Footer>
                 </MediaQuery>
                 <style jsx>{`
