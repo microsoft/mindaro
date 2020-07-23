@@ -8,7 +8,7 @@ fullnameOverride: bikesharingweb
 replicaCount: 1
 image:
   repository: azdspublic/bikesharing-bikesharingweb
-  tag: build.20200629.1
+  tag: build.20200723.1
   pullPolicy: IfNotPresent
 imagePullSecrets: []
   # Optionally specify an array of imagePullSecrets.
