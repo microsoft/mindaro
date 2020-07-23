@@ -1,7 +1,6 @@
 # Default values for bikes.
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
-fullnameOverride: bikes
 replicaCount: 1
 image:
   repository: azdspublic/bikesharing-bikes
