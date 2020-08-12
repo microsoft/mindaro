@@ -14,7 +14,7 @@ The following Action snippet is used in the [Bikesharing sample PR workflow ](ht
             host: "${{ secrets.HOST }}"
             protocol: "http"
  ```       
-where secrets.INGRESS is the host URL for the app deployed in AKS. See [Pull Request Flow Documentation for Local Process for Kubernetes](https://aka.ms/devspaces/pr-flow#configure-your-github-action)
+where secrets.HOST is the host URL for the app deployed in AKS. See [Pull Request Flow Documentation for Local Process for Kubernetes](https://aka.ms/devspaces/pr-flow#configure-your-github-action)
 
 ## How to build this GitHub Action for development
 Navigate to the directory: .\actions\add-review-url\src and run
