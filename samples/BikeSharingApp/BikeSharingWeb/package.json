@@ -25,12 +25,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Azure/dev-spaces.git"
+    "url": "git+https://github.com/microsoft/mindaro.git"
   },
-  "author": "Azure Dev Spaces",
+  "author": "Local Process for Kubernetes",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Azure/dev-spaces/issues"
+    "url": "https://github.com/microsoft/mindaro/issues"
   },
-  "homepage": "https://github.com/Azure/dev-spaces#readme"
+  "homepage": "https://github.com/microsoft/mindaro#readme"
 }
