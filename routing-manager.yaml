@@ -18,7 +18,8 @@ rules:
   verbs: [watch, list, delete]
 - apiGroups: [""]
   resources:
-  - services, configmaps
+  - services 
+  - configmaps
   verbs: [list, create, update, delete]
 - apiGroups: [extensions,networking.k8s.io]
   resources:
