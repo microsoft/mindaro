@@ -70,10 +70,10 @@ jobs:
           ${{ secrets.IMAGE_PULL_SECRET }}
     - name: Add routing labels
       run: |
-        kubectl label pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-from=bikes -n ${{ secrets.MASTER_SPACE }}
-        kubectl annotate pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-on-header=kubernetes-route-as=${{steps.generate-valid-branch-name.outputs.result}} -n ${{ secrets.MASTER_SPACE }}
+        kubectl label pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-from=bikes -n ${{ secrets.MASTER_SPACE }} --override=true
+        kubectl annotate pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-on-header=kubernetes-route-as=${{steps.generate-valid-branch-name.outputs.result}} -n ${{ secrets.MASTER_SPACE }} --override=true
  
-    - uses: microsoft/mindaro/actions/add-review-url@Releases/v2
+    - uses: microsoft/mindaro/actions/add-review-url@s-tuli/add-review-url_update
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         host: ${{ secrets.HOST }}
