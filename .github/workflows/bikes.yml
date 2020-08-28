@@ -1,0 +1,83 @@
+name: PRFlow Bikes
+
+on:
+  pull_request:
+    branches:
+      - master
+    paths:
+      - samples/BikeSharingApp/Bikes/**
+env:
+  # azure
+  # resourceGroup: myResourceGroup
+  nameSpace: "${{ secrets.MASTER_SPACE }}"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Checkout branch"
+        uses: actions/checkout@v2
+
+      - uses: azure/docker-login@v1
+        with:
+          login-server: ${{ secrets.CONTAINER_REGISTRY }}
+          username: ${{ secrets.REGISTRY_USERNAME }}
+          password: ${{ secrets.REGISTRY_PASSWORD }}
+
+      - run: |
+          docker build samples/BikeSharingApp/Bikes/ -t ${{ secrets.CONTAINER_REGISTRY }}/bikes:$GITHUB_SHA
+          docker push ${{ secrets.CONTAINER_REGISTRY }}/bikes:$GITHUB_SHA
+      - uses: azure/aks-set-context@v1
+        with:
+          creds: "${{ secrets.AZURE_CREDENTIALS }}"
+          cluster-name: ${{ secrets.CLUSTER_NAME }}
+          resource-group: ${{ secrets.RESOURCE_GROUP }}
+
+      - name: Create valid branch name
+        id: generate-valid-branch-name
+        run: |
+          branch=${GITHUB_HEAD_REF::63}        
+          branch=$(echo ${branch//[!0-9a-zA-Z]/-} | tr '[:upper:]' '[:lower:]' | sed -e 's/^-/z/' -e 's/-$/z/')
+          echo ::set-output name=result::$branch
+      - uses: azure/k8s-create-secret@v1
+        with:
+          namespace: ${{ env.nameSpace }}
+          container-registry-url: ${{ secrets.CONTAINER_REGISTRY }}
+          container-registry-username: ${{ secrets.REGISTRY_USERNAME }}
+          container-registry-password: ${{ secrets.REGISTRY_PASSWORD }}
+          secret-name: ${{ secrets.IMAGE_PULL_SECRET }}
+
+      - name: Create valid release-name
+        id: generate-release-name
+        run: |
+          release=bikesharing-$GITHUB_HEAD_REF
+          release=${release::53}
+          release=$(echo ${release//[!0-9a-zA-Z]/-} | tr '[:upper:]' '[:lower:]' | sed -e 's/^-/z/' -e 's/-$/z/')
+          echo ::set-output name=result::$release
+      - uses: azure/k8s-bake@v1
+        with:
+          renderEngine: "helm2"
+          helmChart: "./samples/BikeSharingApp/Bikes/charts/bikes/"
+          releaseName: ${{steps.generate-release-name.outputs.result}}
+          overrides: |
+            image.repository:${{ secrets.CONTAINER_REGISTRY }}/bikes
+            image.tag:${{ github.sha }}
+        id: bake
+
+      # Deploy app to AKS
+      - uses: azure/k8s-deploy@v1
+        with:
+          manifests: ${{ steps.bake.outputs.manifestsBundle }}
+          namespace: ${{ env.nameSpace }}
+          force: "true"
+          imagepullsecrets: |
+            ${{ secrets.IMAGE_PULL_SECRET }}
+      - name: Add routing labels
+        run: |
+          kubectl label pods --selector="app=bikes,release=${{steps.generate-valid-branch-name.outputs.result}}" routing.visualstudio.io/route-from=${{steps.generate-valid-branch-name.outputs.result}}-bikes -n ${{ env.nameSpace }} --overwrite=true
+          kubectl annotate pods --selector="app=bikes,release=${{steps.generate-valid-branch-name.outputs.result}}" routing.visualstudio.io/route-on-header=kubernetes-route-as=${{steps.generate-valid-branch-name.outputs.result}} -n ${{ env.nameSpace }} --overwrite=true
+      - uses: microsoft/mindaro/actions/add-review-url@Releases/v2
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          host: ${{ secrets.HOST }}
+          protocol: "http"

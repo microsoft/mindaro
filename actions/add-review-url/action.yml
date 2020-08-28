@@ -1,0 +1,16 @@
+name: "Local Process for Kubernetes Review Url"
+description: "Add Review Url as a comment on PR"
+author: "Local Process for Kubernetes"
+inputs:
+  repo-token: # GitHub Authorization Token
+    description: "This is GitHub Authorization Token that is available by default as a GitHub secret. Set it's value to GITHUB_TOKEN secret in your workflow yml"
+    required: true
+  host: # Complete host.
+    description: "Complete host. This expands to: [rootSpace.]webfrontend.<random suffix>.<region>.aksapp.io. For more information see https://aka.ms/lpk/routing"
+    required: true
+  protocol: # This is an optional parameter that the user can specify (http vs https)
+    description: "This is an optional parameter that the user can specify: example values - http or https"
+    required: false
+runs:
+  using: "node12"
+  main: "lib/index.js"
