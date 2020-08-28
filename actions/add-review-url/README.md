@@ -9,7 +9,8 @@ The following Action snippet is used in the [Bikesharing sample PR workflow ](ht
 ```
     - uses: microsoft/mindaro/actions/add-review-url@Releases/v2              
         with:
-            repo-token: ${{ secrets.GITHUB_TOKEN }}
+            repo-token: ${{ secrets.GITHUB_TOKEN }}  
+            branch-name: ${{steps.generate-valid-branch-name.outputs.result}}
             host: "${{ secrets.HOST }}"
             protocol: "http"
  ```       
