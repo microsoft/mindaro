@@ -1,0 +1,29 @@
+{
+  "name": "addreviewurl",
+  "version": "1.0.0",
+  "description": "Add Review Url as a comment on the pull request",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "jest",
+    "build": "tsc"
+  },
+  "keywords": [
+    "comment",
+    "graphql"
+  ],
+  "author": "Azure Dev Spaces",
+  "license": "MIT",
+  "homepage": "https://github.com/azure/dev-spaces/actions/add-review-url-ts#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.0",
+    "@octokit/graphql": "^4.3.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.21",
+    "@types/node": "^12.12.3",
+    "jest": "^24.9.0",
+    "jest-circus": "^24.7.1",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.4"
+  }
+}
