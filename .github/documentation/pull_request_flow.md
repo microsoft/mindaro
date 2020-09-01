@@ -126,7 +126,7 @@ Navigate to your forked repository and click Settings. Click on Secrets in the l
 4.	***CONTAINER_REGISTRY***: the loginServer for the ACR.
 5.	***URL***: the URL for your application, which in this example is `bikeapp.bikesharingweb.EXTERNAL_IP.nip.io`
 6.	***IMAGE_PULL_SECRET***: the name of the secret you wish to use, for example demo-secret.
-7.	***MAIN_SPACE***: the namespace where your application is running, which in this example is `bikeapp`.
+7.	***MASTER_SPACE***: the namespace where your application is running, which in this example is `bikeapp`.
 8.	***REGISTRY_USERNAME***: the clientId from the JSON output from the service principal creation.
 9.	***REGISTRY_PASSWORD***: the clientSecret from the JSON output from the service principal creation.
 
@@ -176,6 +176,8 @@ After your pull request is opened, navigate to the Actions tab. Verify a new act
 ## View the review app with your change
 
 After the action has completed, you will see a comment with a URL to a review app based the changes in the pull request.
+
+![](images/review_app_url.png)
  
 Navigate to the bikesharingweb service by opening the URL from the comment. Select Aurelia Briggs (customer) as the user, then select a bike to rent. Verify you no longer see the placeholder image for the bike.
 
