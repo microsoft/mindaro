@@ -61,7 +61,7 @@ In the above sample, the public URL is `bikeapp.bikesharingweb.EXTERNAL_IP.nip.i
 Once the BikeSharing sample application has been installed and is running in your cluster, deploy the routing manager into the same namespace.
 
 ```
-kubectl apply -n bikeapp -f routingmanager.yaml
+kubectl apply -n bikeapp -f routingmanager.yml
 ```
 
 Ensure the routing manager is successfully running with `kubectl get pods -n bikeapp`. You should see the pod running: 
