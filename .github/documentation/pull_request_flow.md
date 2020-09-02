@@ -124,7 +124,7 @@ Navigate to your forked repository and click Settings. Click on Secrets in the l
 2.	***RESOURCE_GROUP***: the resource group for your AKS cluster, which in this example is MyResourceGroup.
 3.	***CLUSTER_NAME***: the name of your AKS cluster, which in this example is MyAKS.
 4.	***CONTAINER_REGISTRY***: the loginServer for the ACR.
-5.	***URL***: the URL for your application, which in this example is `bikeapp.bikesharingweb.EXTERNAL_IP.nip.io`
+5.	***HOST***: the URL for your application, which in this example is `bikeapp.bikesharingweb.EXTERNAL_IP.nip.io`
 6.	***IMAGE_PULL_SECRET***: the name of the secret you wish to use, for example demo-secret.
 7.	***MASTER_SPACE***: the namespace where your application is running, which in this example is `bikeapp`.
 8.	***REGISTRY_USERNAME***: the clientId from the JSON output from the service principal creation.
