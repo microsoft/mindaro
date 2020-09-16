@@ -2,8 +2,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "local-process-with-kubernetes.service",
-            "type": "local-process-with-kubernetes.service",
+            "label": "bridge-to-kubernetes.service",
+            "type": "bridge-to-kubernetes.service",
             "service": "bikes",
             "ports": [
                 3000
