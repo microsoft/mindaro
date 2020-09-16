@@ -1,6 +1,6 @@
 # GitHub Actions & Kubernetes Pull Request Flow (preview)
 
-Local Process with Kubernetes (LPK) lets you work in isolation from colleagues using the same cluster and namespace by leveraging Microsoft’s new, proprietary routing technology. You can also apply the isolation capability outside the LPK experience, such as directly from a GitHub pull request. You can test changes from a PR directly in Kubernetes before the pull request is merged into the main branch of your repo. Having a running application to review changes of a pull request can increase confidence in proposed code changes. Testing your changes in the running application can also help other team members, such as product managers and designers, see the results of development work even in the early stages.
+Bridge to Kubernetes lets you work in isolation from colleagues using the same cluster and namespace by leveraging Microsoft’s new, proprietary routing technology. You can also apply the isolation capability outside the Bridge to Kubernetes experience, such as directly from a GitHub pull request. You can test changes from a PR directly in Kubernetes before the pull request is merged into the main branch of your repo. Having a running application to review changes of a pull request can increase confidence in proposed code changes. Testing your changes in the running application can also help other team members, such as product managers and designers, see the results of development work even in the early stages.
 
 **Note**: This example uses GitHub workflows, but this capability is not limited to GitHub and can be applied to any CI/CD system. 
 
@@ -40,15 +40,15 @@ Install the sample application on your cluster using the provided script. You ca
 ```
 git clone https://github.com/Microsoft/mindaro
 cd mindaro
-chmod +x ./local-process-quickstart.sh
-./local-process-quickstart.sh -g MyResourceGroup -n MyAKS
+chmod +x ./bridge-quickstart.sh
+./bridge-quickstart.sh -g MyResourceGroup -n MyAKS
 ```
 
 Navigate to the sample application running your cluster by opening its public URL, which is displayed in the output of the installation script.
 
 ```
-$ ./local-process-quickstart.sh -g MyResourceGroup -n MyAKS
-Defaulting Dev spaces repository root to current directory : ~/mindaro
+$ ./bridge-quickstart.sh -g MyResourceGroup -n MyAKS
+Defaulting Bridge to Kubernetes repository root to current directory : ~/mindaro
 Setting the Kube context
 ...
 To try out the app, open the url:

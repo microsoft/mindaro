@@ -7,7 +7,7 @@
 
 ## Documentation
 
-We have guides available in VSCode and Visual Studio.
+We have guides available in VS Code and Visual Studio.
 
-* [Visual Studio Code Quickstart](https://aka.ms/lpk-quickstart-bikes-vscode)
-* [Visual Studio Quickstart](https://aka.ms/lpk-quickstart-bikes-vs)
+* [Visual Studio Code Quickstart](https://aka.ms/bridge-to-k8s-vscode-quickstart)
+* [Visual Studio Quickstart](https://aka.ms/bridge-to-k8s-vs-quickstart)

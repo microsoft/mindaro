@@ -27,7 +27,7 @@
     "type": "git",
     "url": "git+https://github.com/microsoft/mindaro.git"
   },
-  "author": "Local Process for Kubernetes",
+  "author": "Bridge to Kubernetes",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/microsoft/mindaro/issues"

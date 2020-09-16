@@ -19,8 +19,8 @@ A clear and concise description of what you expected to happen.
  
 **Logs**
 Attach logs from the following directory:
-For Windows: %TEMP%/Local Process with Kubernetes
-For OSX/Linux: $TMPDIR/Local Process with Kubernetes
+For Windows: %TEMP%/Bridge to Kubernetes
+For OSX/Linux: $TMPDIR/Bridge to Kubernetes
  
 **Environment Details**
 Client used (VS Code/Visual Studio):
