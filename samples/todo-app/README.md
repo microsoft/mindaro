@@ -63,40 +63,40 @@ Place a breakpoint on line 17 of server.js.
 
 Open the `Command Pallette (Ctrl + SHIFT + P) or (CMD + SHIFT + P)` and type Bridge to Kubernetes. Select the `"Bridge to Kubernetes: Configure"` option.
 
-![](/images/bridge_configure.png)
+![](images/bridge_configure.png)
 
 You are prompted to configure the service you want to replace, the port to forward from your development computer, and the launch task to use.
 
 Choose the `stats-api` service. 
-![](/images/select_service.png)
+![](images/select_service.png)
 
 After you select your service, you are prompted to enter the TCP port for your local application. For this example, enter `3001`.
-![](/images/enter_port.png)
+![](images/enter_port.png)
 
 Choose `Run Script: dev` as the launch task.
-![](/images/launch_task.png)
+![](images/launch_task.png)
 
 > Note: You will be prompted to allow the EndpointManager to run elevated and modify your hosts file.
 
 You have the option of running isolated or not isolated. If you run isolated, only your requests are routed to your local process; other developers can use the cluster without being affected. If you don't run isolated, all traffic is redirected to your local process. For more information on this option, see [Using routing capabilities for developing in isolation](https://docs.microsoft.com/en-us/visualstudio/containers/overview-bridge-to-kubernetes?view=vs-2019#using-routing-capabilities-for-developing-in-isolation). For this example, we will proceed with non-isolated.
-![](/images/isolation.png)
+![](images/isolation.png)
 
 The Bridge to Kubernetes debugging profile has been sussccessfully configured.
 
 Select the Debug icon on the left and select `Run Script: dev with Bridge to Kubernetes`. Click the start button next to `Run Script: dev with Kubernetes`.
 
-![](/images/debug_profile.png)
+![](images/debug_profile.png)
 
 Your development computer is connected when the VS Code status bar turns orange and the Kubernetes extension shows you are connected. Once your development computer is connected, traffic starts redirecting to your development computer for the stats-api you are replacing.
 
-![](/images/debugging.png)
+![](images/debugging.png)
 
 
 Navigate to the frontend entry point of your todo-app. For minikube, we'll be using `127.0.0.1`.
 
 Make a request to the stats-api by clicking on the `stats` link. 
 
-![](/images/stats.png)
+![](images/stats.png)
 
 Notice the traffic that initally started in your cluster was redirected to your locally running version (outside of the cluster) where the breakpoint was triggered. 
 
