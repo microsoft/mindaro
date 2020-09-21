@@ -34,20 +34,20 @@ kubectl apply -n todo-app -f deployment.yaml
 
 This is a simple deployment that exposes the frontend using a service of type `LoadBalancer`. Wait for all the pods to be running and for the external IP of the `frontend` service to become available.
 
-If you are testing with MiniKube, you will need to use `minikube tunnel` in  to resolve an external IP.
+If you are testing with MiniKube, you will need to use `minikube tunnel` to resolve an external IP.
 
 ```
 kubectl get services -n todo-app
 
 NAME          TYPE           CLUSTER-IP     EXTERNAL-IP      PORT(S)        AGE
-frontend      LoadBalancer   10.0.49.177    52.149.235.179   80:30145/TCP   18h
+frontend      LoadBalancer   10.0.49.177    127.0.0.1   80:30145/TCP   18h
 ```
 
 Browse to the application using the external IP and give it a spin. As you add, complete and delete todos, notice that the stats page updates with the expected metrics
 
 ## Debug the stats-api service
 
-We will now use the Bridge to Kubernetes extension to demonstarte how traffic from the Kubernetes cluster can be redirected to a locally running version of the stats-api. 
+We will now use the Bridge to Kubernetes extension to demonstrate how traffic from the Kubernetes cluster can be redirected to a locally running version of the stats-api. 
 
 ```
 cd stats-api/
@@ -76,12 +76,12 @@ After you select your service, you are prompted to enter the TCP port for your l
 Choose `Run Script: dev` as the launch task.
 ![](images/launch_task.png)
 
-> Note: You will be prompted to allow the EndpointManager to run elevated and modify your hosts file.
-
 You have the option of running isolated or not isolated. If you run isolated, only your requests are routed to your local process; other developers can use the cluster without being affected. If you don't run isolated, all traffic is redirected to your local process. For more information on this option, see [Using routing capabilities for developing in isolation](https://docs.microsoft.com/en-us/visualstudio/containers/overview-bridge-to-kubernetes?view=vs-2019#using-routing-capabilities-for-developing-in-isolation). For this example, we will proceed with non-isolated.
 ![](images/isolation.png)
 
-The Bridge to Kubernetes debugging profile has been sussccessfully configured.
+> Note: You will be prompted to allow the EndpointManager to run elevated and modify your hosts file.
+
+The Bridge to Kubernetes debugging profile has been successfully configured.
 
 Select the Debug icon on the left and select `Run Script: dev with Bridge to Kubernetes`. Click the start button next to `Run Script: dev with Kubernetes`.
 
@@ -102,7 +102,7 @@ Notice the traffic that initally started in your cluster was redirected to your 
 
 Press play and let the request contine complete transparently.
 
-This is just one example on how to use Bridge to Kubernetes on non-AKS clusters.  Try it on your own projet next!
+This is just one example on how to use Bridge to Kubernetes on non-AKS clusters.  Try it on your own project next!
 
 ## Clean up
 
