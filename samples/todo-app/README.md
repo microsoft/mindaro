@@ -14,7 +14,7 @@ In all, this extended TODO application is composed of six inter-related componen
 ## Prerequisites
 
 - Kubectl CLI (connected to a cluster)
-- Bridge to Kubernetes VS Code extension
+- [Bridge to Kubernetes VS Code extension](https://aka.ms/bridge-to-k8s-vsc-extension)
 
 ## Deploy the application
 
