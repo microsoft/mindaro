@@ -8,11 +8,11 @@ set -e
 #4. gunzip
 #5. tar
 
-HELMDIR=/var/tmp/helm_lpk
+HELMDIR=/var/tmp/helm_bridge
 INGRESSNAME=bikesharing-traefik
 
 echo ""
-echo "Local Process for Kubernetes"
+echo "Bridge to Kubernetes"
 echo "Bike Sample App - Quickstart script"
 echo "-----------------------------------"
 echo ""

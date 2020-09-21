@@ -1,8 +1,8 @@
-# Local Process with Kubernetes
+# Bridge to Kubernetes
  
-Local Process with Kubernetes extends the Kubernetes perimeter to your development computer allowing you to write, test, and debug microservice code while connected to your Kubernetes cluster with the rest of your application or services. With this workflow, there is no need for extra assets, such as a Dockerfile or Kubernetes manifests. You can simply run your code natively on your development workstation while connected to the Kubernetes cluster, allowing you to test your code changes in the context of the larger application.
+Bridge to Kubernetes extends the Kubernetes perimeter to your development computer allowing you to write, test, and debug microservice code while connected to your Kubernetes cluster with the rest of your application or services. With this workflow, there is no need for extra assets, such as a Dockerfile or Kubernetes manifests. You can simply run your code natively on your development workstation while connected to the Kubernetes cluster, allowing you to test your code changes in the context of the larger application.
 
-![Alt Text](https://github.com/microsoft/mindaro/raw/master/assets/lpk-graphic-non-isolated.gif)
+![Alt Text](https://aka.ms/bridge-to-k8s-graphic-non-isolated)
 
 ### Key Features:
 
@@ -16,9 +16,9 @@ Local Process with Kubernetes extends the Kubernetes perimeter to your developme
 - Test end-to-end during development time. Select an existing service in the cluster to route to your development machine where an instance of that service is running locally. Request initiated through the frontend of the application running in Kubernetes will route between services running in the cluster until the service you specified to redirect is called. 
 
 ## Documentation
-- [Visual Studio](https://aka.ms/localprocesswithk8s-vs)
-- [Visual Studio Code](https://aka.ms/localprocesswithk8s-vsc)
-- [How Local Process with Kubernetes Works](https://aka.ms/lpk-how-it-works)
+- [Visual Studio](https://aka.ms/bridge-to-k8s-vs-quickstart)
+- [Visual Studio Code](https://aka.ms/bridge-to-k8s-vscode-quickstart)
+- [How Bridge to Kubernetes Works](https://aka.ms/how-bridge-to-k8s-works)
 
 ## Roadmap
 https://github.com/microsoft/mindaro/projects
