@@ -1,0 +1,16 @@
+{
+    "name": "todo-stats-api",
+    "version": "1.0.0",
+    "devDependencies": {
+        "nodemon": "^2.0.4"
+    },
+    "dependencies": {
+        "express": "^4.17.1",
+        "redis": "^3.0.2"
+    },
+    "main": "server.js",
+    "scripts": {
+        "dev": "nodemon",
+        "start": "node server.js"
+    }
+}
