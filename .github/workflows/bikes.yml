@@ -51,7 +51,8 @@ jobs:
           echo ::set-output name=result::$release
     - uses: azure/k8s-bake@v1
       with:
-          renderEngine: 'helm2'
+          renderEngine: 'helm'
+          helm-version: 'v3.3.1'
           helmChart: './samples/BikeSharingApp/Bikes/charts/bikes/'
           releaseName: ${{steps.generate-release-name.outputs.result}}
           overrides: |
