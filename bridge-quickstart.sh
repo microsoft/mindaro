@@ -160,8 +160,8 @@ echo "helm install bikesharingapp (average time to install = 4 minutes)"
 $HELMDIR/helm install bikesharingapp "$CHARTDIR" \
    --set bikesharingweb.ingress.hosts={$BIKENS.bikesharingweb.$NIPIOFQDN} \
    --set gateway.ingress.hosts={$BIKENS.gateway.$NIPIOFQDN} \
-   --set bikesharingweb.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
-   --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
+   --set bikesharingweb.ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
+   --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
    --dependency-update \
    --namespace $BIKENS \
    --timeout 9m \
