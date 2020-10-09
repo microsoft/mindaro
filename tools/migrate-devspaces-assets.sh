@@ -160,6 +160,9 @@ $HELMDIR/helm install $PROJECTNAME "$CHARTDIR" \
 
 echo ""
 
+echo "Deleting azds.yaml file."
+rm -rf "$PROJECTROOT/azds.yaml"
+
 if [[ $ENABLEINGRESS == "true" ]]; then
    echo "To try out the app, open the url:"
    kubectl -n $NAMESPACE get ing $PROJECTNAME -o jsonpath='{.spec.rules[0].host}'
