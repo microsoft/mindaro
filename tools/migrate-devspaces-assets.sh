@@ -89,7 +89,7 @@ if [ ! -f "$PROJECTROOT/azds.yaml" ] || [ ! -f "$PROJECTROOT/Dockerfile.develop"
   echo "$(tput setaf 1)ERROR: '$PROJECTROOT' doesn't seem to be initialized by Azure Dev Spaces. $(tput sgr 0)"
   echo "This tool is to deploy resources that used to be deployed by Azure Dev Spaces."
   echo "'azds.yaml' or 'Dockerfile.develop' or 'charts' folder that were prep'ed by Azure Dev spaces are not found."
-  echo "Run 'azds prep' in $PROJECTROOT and try to run this script again."
+  echo "Run 'azds prep' in $PROJECTROOT and try to run this tool again."
   exit 1
 fi
 
