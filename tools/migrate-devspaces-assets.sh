@@ -112,7 +112,7 @@ fi
    exit 1
 }
 
-if [[ "$DISABLETTY" == "true" ]]; then
+if [[ "$DISABLETTY" == "false" ]]; then
    echo "Are logged in or able to push images to '$CONTAINERREGISTRY' container registry? (Y/n): "
    read RESPONSE
    RESPONSE=$(echo $RESPONSE | tr '[:upper:]' '[:lower:]')
