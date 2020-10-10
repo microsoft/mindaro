@@ -82,7 +82,7 @@ echo "Using kubernetes namespace: $NAMESPACE"
 if [ -z "$PROJECTROOT" ]; then
    PROJECTROOT="$(pwd)"
 fi
-echo "Using project root: $PROJECTROOT"
+echo "Using project root: '$PROJECTROOT'"
 
 echo "Checking directory $PROJECTROOT for 'azds.yaml', 'Dockerfile.develop' & 'charts' folder"
 if [ ! -f "$PROJECTROOT/azds.yaml" ] || [ ! -f "$PROJECTROOT/Dockerfile.develop" ] || [ ! -d "$PROJECTROOT/charts" ]; then
@@ -104,7 +104,7 @@ fi
 {
    installHelmFunction
 } || {
-   echo "Please install helm at location: $HELMDIR by following instruction here: 'https://helm.sh/docs/intro/install/'."
+   echo "Please install helm at location: '$HELMDIR' by following instruction here: 'https://helm.sh/docs/intro/install/'."
    exit 1
 }
 
@@ -116,7 +116,7 @@ if [ "$RESPONSE" != "y" ]; then
    exit 1
 fi
 
-echo "docker build: $PROJECTNAME "
+echo "docker build - '$PROJECTNAME'"
 docker build -f "$PROJECTROOT/Dockerfile.develop" -t "$CONTAINERREGISTRY/$IMAGENAMEANDTAG" "$PROJECTROOT"
 echo
 echo "Pushing image: $CONTAINERREGISTRY/$IMAGENAMEANDTAG"
@@ -175,6 +175,7 @@ $HELMDIR/helm upgrade $PROJECTNAME "$CHARTDIR" \
    --set ingress.enabled="$ENABLEINGRESS" \
    --set ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
    --namespace $NAMESPACE \
+   --create-namespace \
    --timeout 9m \
    --install \
    --force \
@@ -186,4 +187,6 @@ if [[ $ENABLEINGRESS == "true" ]]; then
    kubectl -n $NAMESPACE get ing $PROJECTNAME -o jsonpath='{.spec.rules[0].host}'
    echo ""
 fi
+
+echo "Migration complete."
 
