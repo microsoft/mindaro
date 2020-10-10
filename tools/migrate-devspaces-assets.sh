@@ -30,7 +30,7 @@ helpFunction()
    echo -e "\t-t Image name & tag in format 'name:tag' (default = 'projectName:stable')"
    echo -e "\t-i Enable a public endpoint to access your service over internet. (default = false)"
    echo -e "\t-d Helm Debug switch"
-   exit 1 # Exit script after printing help
+   exit 0 # Exit script after printing help
 }
 
 installHelmFunction()
