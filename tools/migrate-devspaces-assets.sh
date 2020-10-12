@@ -12,6 +12,7 @@ set -e
 HELMDIR=/var/tmp/helm_migrate
 INGRESSNAME=migration-traefik
 ENABLEINGRESS=false
+DISABLETTY=false
 
 echo ""
 echo "Migrate assets of Azure Dev Spaces to Bridge to Kubernetes"
@@ -21,14 +22,16 @@ echo ""
 helpFunction()
 {
    echo ""
-   echo "Usage: $1 -g ResourceGroupName -n AKSName -h ContainerRegistryName"
+   echo "Usage: migrate-devspaces-assets.sh -g ResourceGroupName -n AKSName -h ContainerRegistryName"
+   echo ""
    echo -e "\t-g Name of resource group of AKS Cluster [required]"
    echo -e "\t-n Name of AKS Cluster [required]"
-   echo -e "\t-h Container registry name. Example: ACR, Docker [required]"
-   echo -e "\t-k Kubernetes namespace (uses 'default' otherwise)"
-   echo -e "\t-r Path to Root of the project that needs to be migrated (default = pwd)"
+   echo -e "\t-h Container registry name. Examples: ACR, Docker [required]"
+   echo -e "\t-k Kubernetes namespace to deploy resources (uses 'default' otherwise)"
+   echo -e "\t-r Path to root of the project that needs to be migrated (default = pwd)"
    echo -e "\t-t Image name & tag in format 'name:tag' (default = 'projectName:stable')"
    echo -e "\t-i Enable a public endpoint to access your service over internet. (default = false)"
+   echo -e "\t-y Doesn't prompt for non-tty terminals"
    echo -e "\t-d Helm Debug switch"
    exit 0 # Exit script after printing help
 }
@@ -63,6 +66,7 @@ while getopts "g:n:r:k:h:t:di" opt; do
       h ) CONTAINERREGISTRY="$OPTARG" ;;
       t ) IMAGENAMEANDTAG="$OPTARG" ;;
       i ) ENABLEINGRESS="true" ;;
+      y ) DISABLETTY="true" ;;
       ? ) helpFunction ;; # Print helpFunction in case parameter is non-existent
    esac
 done
@@ -108,12 +112,16 @@ fi
    exit 1
 }
 
-echo "Are logged in or able to push images to '$CONTAINERREGISTRY' container registry? (Y/n): "
-read RESPONSE
-RESPONSE=$(echo $RESPONSE | tr '[:upper:]' '[:lower:]')
-if [ "$RESPONSE" != "y" ]; then
+if [[ "$DISABLETTY" == "false" ]]; then
+   echo "Are logged in or able to push images to '$CONTAINERREGISTRY' container registry? (Y/n): "
+   read RESPONSE
+   RESPONSE=$(echo $RESPONSE | tr '[:upper:]' '[:lower:]')
+   if [ "$RESPONSE" != "y" ]; then
+      echo "Please log in or make sure that you can push images to '$CONTAINERREGISTRY' container registry."
+      exit 1
+   fi
+elif
    echo "Please log in or make sure that you can push images to '$CONTAINERREGISTRY' container registry."
-   exit 1
 fi
 
 echo "docker build - '$PROJECTNAME'"
