@@ -21,7 +21,7 @@ A clear and concise description of what you expected to happen.
 Attach logs from the following directory:
 For Windows: %TEMP%/Bridge to Kubernetes
 For OSX/Linux: $TMPDIR/Bridge to Kubernetes
-For Visual Studio users: %temp%\Microsoft.VisualStudio.Kubernetes.Debugging
+If you are a Visual Studio user, please also provide these logs: %temp%\Microsoft.VisualStudio.Kubernetes.Debugging
  
 **Environment Details**
 Client used (VS Code/Visual Studio):
