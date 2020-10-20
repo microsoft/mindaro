@@ -56,7 +56,7 @@ installHelmFunction()
   fi
 }
 
-while getopts "g:n:r:k:h:t:di" opt; do
+while getopts "g:n:r:k:h:t:dyi" opt; do
    case "$opt" in
       g ) RGNAME="$OPTARG"  ;;
       n ) AKSNAME="$OPTARG"  ;;
@@ -104,6 +104,7 @@ PROJECTNAME=$(basename $PROJECTROOT)
 if [ -z "$IMAGENAMEANDTAG" ]; then
    IMAGENAMEANDTAG="$PROJECTNAME:stable"
 fi
+IMAGENAMEANDTAG=$(echo $IMAGENAMEANDTAG | tr [:upper:] [:lower:])
 
 {
    installHelmFunction
@@ -120,7 +121,7 @@ if [[ "$DISABLETTY" == "false" ]]; then
       echo "Please log in or make sure that you can push images to '$CONTAINERREGISTRY' container registry."
       exit 1
    fi
-elif
+else
    echo "Please log in or make sure that you can push images to '$CONTAINERREGISTRY' container registry."
 fi
 
@@ -133,8 +134,13 @@ docker push "$CONTAINERREGISTRY/$IMAGENAMEANDTAG"
 echo "Updating the image name in $PROJECTROOT/charts/$PROJECTNAME/values.yaml file:"
 IFS=':' read -ra IMAGENAMEARRAY <<< "$CONTAINERREGISTRY/$IMAGENAMEANDTAG"
 
-sed -i "s^repository:.*^repository: ${IMAGENAMEARRAY[0]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
-sed -i "s^tag:.*^tag: ${IMAGENAMEARRAY[1]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+   sed -i "s^repository:.*^repository: ${IMAGENAMEARRAY[0]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
+   sed -i "s^tag:.*^tag: ${IMAGENAMEARRAY[1]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+   sed -i '' "s^repository:.*^repository: ${IMAGENAMEARRAY[0]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
+   sed -i '' "s^tag:.*^tag: ${IMAGENAMEARRAY[1]}^g" "$PROJECTROOT/charts/$PROJECTNAME/values.yaml"
+fi
 
 echo "Setting the Kube context to $AKSNAME in $RGNAME"
 az aks get-credentials -g $RGNAME -n $AKSNAME
