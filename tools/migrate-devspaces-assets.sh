@@ -27,7 +27,7 @@ helpFunction()
    echo ""
    echo -e "\t-g Name of resource group of AKS Cluster [required]"
    echo -e "\t-n Name of AKS Cluster [required]"
-   echo -e "\t-h Container registry name. Examples: ACR, Docker [required] (On Azure Cloud Shell only supports ACR)"
+   echo -e "\t-h Container registry name. Examples: ACR, Docker [required] (Azure Cloud Shell only supports hosting images in ACR)"
    echo -e "\t-k Kubernetes namespace to deploy resources (uses 'default' otherwise)"
    echo -e "\t-r Path to root of the project that needs to be migrated (default = pwd)"
    echo -e "\t-t Image name & tag in format 'name:tag' (default = 'projectName:stable')"
