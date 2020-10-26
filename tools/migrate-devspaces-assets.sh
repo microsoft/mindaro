@@ -134,7 +134,7 @@ else
 fi
 
 # Check if running on azure cloud shell
-if [ command -v clouddrive &> /dev/null ]; then
+if command -v clouddrive &> /dev/null ; then
    CLOUDDRIVEHELP=$(clouddrive -h)
    if [[ $CLOUDDRIVEHELP == *"Azure Cloud Shell"* ]]; then
       ISAZURESHELL="true"
