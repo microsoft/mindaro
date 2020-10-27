@@ -144,6 +144,9 @@ fi
 
 if [[ "$ISAZURESHELL" == "true" ]]; then
    echo "Building and pushing to Azure Container registry..."
+   if [[ $CONTAINERREGISTRY != *"azurecr.io"* ]]; then
+      CONTAINERREGISTRY="$CONTAINERREGISTRY.azurecr.io"
+   fi
    az acr build -r $CONTAINERREGISTRY -t $IMAGENAMEANDTAG -f "$PROJECTROOT/Dockerfile.develop" "$DOCKERBUILDCONTEXT"
 else
    echo "Building dockerfile for: '$PROJECTNAME'"
