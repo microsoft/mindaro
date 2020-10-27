@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-# Please install the below pre-requisites if using this on your local machine, or alternately, you can just use azure bash cloudshell for a seamless experience.
+# Please install the below pre-requisites if using this on your local machine, or alternately, you can just use Azure Cloud Shell for a seamless experience.
 #1. azure cli    :   https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 #2. kubectl      :   https://kubernetes.io/docs/tasks/tools/install-kubectl/
 #3. curl

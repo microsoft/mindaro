@@ -13,6 +13,7 @@ HELMDIR=/var/tmp/helm_migrate
 INGRESSNAME=migration-traefik
 ENABLEINGRESS=false
 DISABLETTY=false
+ISAZURESHELL=false
 
 echo ""
 echo "Migrate assets of Azure Dev Spaces to Bridge to Kubernetes"
@@ -26,11 +27,12 @@ helpFunction()
    echo ""
    echo -e "\t-g Name of resource group of AKS Cluster [required]"
    echo -e "\t-n Name of AKS Cluster [required]"
-   echo -e "\t-h Container registry name. Examples: ACR, Docker [required]"
+   echo -e "\t-h Container registry name. Examples: ACR, Docker [required] (Azure Cloud Shell only supports hosting images in ACR)"
    echo -e "\t-k Kubernetes namespace to deploy resources (uses 'default' otherwise)"
    echo -e "\t-r Path to root of the project that needs to be migrated (default = pwd)"
    echo -e "\t-t Image name & tag in format 'name:tag' (default = 'projectName:stable')"
    echo -e "\t-i Enable a public endpoint to access your service over internet. (default = false)"
+   echo -e "\t-c Docker build context path. (default = project root path passed to '-r' option)"
    echo -e "\t-y Doesn't prompt for non-tty terminals"
    echo -e "\t-d Helm Debug switch"
    exit 0 # Exit script after printing help
@@ -56,13 +58,14 @@ installHelmFunction()
   fi
 }
 
-while getopts "g:n:r:k:h:t:dyi" opt; do
+while getopts "g:n:r:k:h:c:t:dyi" opt; do
    case "$opt" in
       g ) RGNAME="$OPTARG"  ;;
       n ) AKSNAME="$OPTARG"  ;;
       r ) PROJECTROOT="$OPTARG"  ;;
       d ) HELMARGS=" --debug" ;;
       k ) NAMESPACE="$OPTARG" ;;
+      c ) DOCKERBUILDCONTEXT="$OPTARG" ;;
       h ) CONTAINERREGISTRY="$OPTARG" ;;
       t ) IMAGENAMEANDTAG="$OPTARG" ;;
       i ) ENABLEINGRESS="true" ;;
@@ -87,6 +90,11 @@ if [ -z "$PROJECTROOT" ]; then
    PROJECTROOT="$(pwd)"
 fi
 echo "Using project root: '$PROJECTROOT'"
+
+if [ -z "$DOCKERBUILDCONTEXT" ]; then
+   DOCKERBUILDCONTEXT=$PROJECTROOT
+fi
+echo "Using docker build context: '$DOCKERBUILDCONTEXT'"
 
 echo "Checking directory $PROJECTROOT for 'azds.yaml', 'Dockerfile.develop' & 'charts' folder"
 if [ ! -f "$PROJECTROOT/azds.yaml" ] || [ ! -f "$PROJECTROOT/Dockerfile.develop" ] || [ ! -d "$PROJECTROOT/charts" ]; then
@@ -125,11 +133,28 @@ else
    echo "Please log in or make sure that you can push images to '$CONTAINERREGISTRY' container registry."
 fi
 
-echo "docker build - '$PROJECTNAME'"
-docker build -f "$PROJECTROOT/Dockerfile.develop" -t "$CONTAINERREGISTRY/$IMAGENAMEANDTAG" "$PROJECTROOT"
-echo
-echo "Pushing image: $CONTAINERREGISTRY/$IMAGENAMEANDTAG"
-docker push "$CONTAINERREGISTRY/$IMAGENAMEANDTAG"
+# Check if running on azure cloud shell
+if command -v clouddrive &> /dev/null ; then
+   CLOUDDRIVEHELP=$(clouddrive -h)
+   if [[ $CLOUDDRIVEHELP == *"Azure Cloud Shell"* ]]; then
+      ISAZURESHELL="true"
+      echo "Detected Azure Cloud Shell."
+   fi
+fi
+
+if [[ "$ISAZURESHELL" == "true" ]]; then
+   echo "Building and pushing to Azure Container registry..."
+   if [[ $CONTAINERREGISTRY != *"azurecr.io"* ]]; then
+      CONTAINERREGISTRY="$CONTAINERREGISTRY.azurecr.io"
+   fi
+   az acr build -r $CONTAINERREGISTRY -t $IMAGENAMEANDTAG -f "$PROJECTROOT/Dockerfile.develop" "$DOCKERBUILDCONTEXT"
+else
+   echo "Building dockerfile for: '$PROJECTNAME'"
+   docker build -f "$PROJECTROOT/Dockerfile.develop" -t "$CONTAINERREGISTRY/$IMAGENAMEANDTAG" "$DOCKERBUILDCONTEXT"
+   echo
+   echo "Pushing image: $CONTAINERREGISTRY/$IMAGENAMEANDTAG"
+   docker push "$CONTAINERREGISTRY/$IMAGENAMEANDTAG"
+fi
 
 echo "Updating the image name in $PROJECTROOT/charts/$PROJECTNAME/values.yaml file:"
 IFS=':' read -ra IMAGENAMEARRAY <<< "$CONTAINERREGISTRY/$IMAGENAMEANDTAG"
