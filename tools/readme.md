@@ -29,7 +29,7 @@ Flags:
     -r Path to root of the project that needs to be migrated (default = pwd)
     -t Image name & tag in format 'name:tag' (default = 'projectName:stable')
     -i Enable a public endpoint to access your service over internet. (default = false)
-    -t Docker build context path. (default = project root path passed to '-r' option)
+    -c Docker build context path. (default = project root path passed to '-r' option)
     -y Doesn't prompt for non-tty terminals
     -d Helm Debug switch  
 ```
