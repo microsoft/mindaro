@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: routingmanager-sa
+  labels:
+    routing.visualstudio.io/component: routingmanager
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: routingmanager-role
+  labels:
+    routing.visualstudio.io/component: routingmanager
+rules:
+- apiGroups: [""]
+  resources:
+  - pods
+  verbs: [watch, list, delete]
+- apiGroups: [""]
+  resources:
+  - services
+  - configmaps
+  verbs: [list, create, update, delete]
+- apiGroups: [extensions,networking.k8s.io]
+  resources:
+  - ingresses
+  verbs: [watch, list, create, update, delete]
+- apiGroups: [apps,extensions]
+  resources:
+  - deployments
+  - deployments/status
+  verbs: [get, list, create, update, delete]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: routingmanager-rolebinding
+  labels:
+    routing.visualstudio.io/component: routingmanager
+subjects:
+- kind: ServiceAccount
+  name: routingmanager-sa
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: routingmanager-role
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: routingmanager-deployment
+  labels:
+    routing.visualstudio.io/component: routingmanager
+spec:
+  selector:
+    matchLabels:
+      routing.visualstudio.io/component: routingmanager
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        routing.visualstudio.io/component: routingmanager
+    spec:
+      serviceAccountName: routingmanager-sa
+      containers:
+      - name: routingmanager
+        image: azds/routingmanager:stable
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+        env:
+        - name: NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        - name: BRIDGE_COLLECT_TELEMETRY
+          value: "True"
+      terminationGracePeriodSeconds: 15
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: routingmanager-service
+spec:
+  selector:
+    routing.visualstudio.io/component: routingmanager
+  ports:
+  - port: 80
+    targetPort: 80

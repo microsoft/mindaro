@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 name: "Local Process for Kubernetes Review Url"
 description: "Add Review Url as a comment on PR"
 author: "Local Process for Kubernetes"
@@ -11,9 +12,28 @@ inputs:
   branch-name: # branch-name.
     description: "This is the branch-name passed in from the workflow to construct the uri."
     required: true
+=======
+name: "Bridge to Kubernetes Review Url"
+description: "Add Review Url as a comment on PR"
+author: "Bridge to Kubernetes"
+inputs:
+  repo-token: # GitHub Authorization Token
+    description: "This is GitHub Authorization Token that is available by default as a GitHub secret. Set it's value to GITHUB_TOKEN secret in your workflow yml"
+    required: true    
+  branch-name: # branch-name.
+    description: "This is the branch-name passed in from the workflow to construct the uri."
+    required: true
+  host: # Complete host.
+    description: "Complete host. This expands to: [rootSpace.]webfrontend.<random suffix>.<region>.aksapp.io. For more information see https://aka.ms/bridge-to-k8s-routing"
+    required: true
+>>>>>>> main/master
   protocol: # This is an optional parameter that the user can specify (http vs https)
     description: "This is an optional parameter that the user can specify: example values - http or https"
     required: false
 runs:
   using: "node12"
+<<<<<<< HEAD
   main: "lib/index.js"
+=======
+  main: "lib/index.js"
+>>>>>>> main/master

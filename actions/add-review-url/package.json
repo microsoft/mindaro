@@ -11,9 +11,15 @@
     "comment",
     "graphql"
   ],
+<<<<<<< HEAD
   "author": "Local Process for Kubernetes",
   "license": "MIT",
   "homepage": "https://github.com/microsoft/mindaro/actions/add-review-url-ts#readme",
+=======
+  "author": "Bridge to Kubernetes",
+  "license": "MIT",
+  "homepage": "https://github.com/azure/dev-spaces/actions/add-review-url-ts#readme",
+>>>>>>> main/master
   "dependencies": {
     "@actions/core": "^1.2.0",
     "@octokit/graphql": "^4.3.0"

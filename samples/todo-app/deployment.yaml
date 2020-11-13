@@ -1,0 +1,176 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-cache
+spec:
+  selector:
+    matchLabels:
+      name: stats-cache
+  template:
+    metadata:
+      labels:
+        name: stats-cache
+    spec:
+      containers:
+      - name: cache
+        image: redis:5-alpine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-cache
+spec:
+  selector:
+    name: stats-cache
+  ports:
+  - port: 6379
+    targetPort: 6379
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-queue
+spec:
+  selector:
+    matchLabels:
+      name: stats-queue
+  template:
+    metadata:
+      labels:
+        name: stats-queue
+    spec:
+      containers:
+      - name: queue
+        image: rabbitmq:3-alpine
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-queue
+spec:
+  selector:
+    name: stats-queue
+  ports:
+  - port: 5672
+    targetPort: 5672
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-worker
+spec:
+  selector:
+    matchLabels:
+      name: stats-worker
+  template:
+    metadata:
+      labels:
+        name: stats-worker
+    spec:
+      containers:
+      - name: stats-worker
+        image: azdspublic/todo-app-stats-worker
+        env:
+        - name: STATS_QUEUE_URI
+          value: amqp://stats-queue
+        - name: REDIS_HOST
+          value: stats-cache
+        - name: REDIS_PORT
+          value: "6379"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: stats-api
+spec:
+  selector:
+    matchLabels:
+      name: stats-api
+  template:
+    metadata:
+      labels:
+        name: stats-api
+    spec:
+      containers:
+      - name: stats-api
+        image: azdspublic/todo-app-stats-api
+        env:
+        - name: REDIS_HOST
+          value: stats-cache
+        - name: REDIS_PORT
+          value: "6379"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: stats-api
+spec:
+  selector:
+    name: stats-api
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: todos-db
+spec:
+  selector:
+    matchLabels:
+      name: todos-db
+  template:
+    metadata:
+      labels:
+        name: todos-db
+    spec:
+      containers:
+      - name: todos-db
+        image: mongo:4
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: todos-db
+spec:
+  selector:
+    name: todos-db
+  ports:
+  - port: 27017
+    targetPort: 27017
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+spec:
+  selector:
+    matchLabels:
+      name: frontend
+  template:
+    metadata:
+      labels:
+        name: frontend
+    spec:
+      containers:
+      - name: frontend
+        image: azdspublic/todo-app-frontend
+        env:
+        - name: MONGO_CONNECTION_STRING
+          value: mongodb://todos-db
+        - name: STATS_QUEUE_URI
+          value: amqp://stats-queue
+        - name: STATS_API_HOST
+          value: stats-api
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+spec:
+  type: LoadBalancer
+  selector:
+    name: frontend
+  ports:
+  - port: 80
+    targetPort: 80
