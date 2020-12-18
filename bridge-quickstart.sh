@@ -125,7 +125,7 @@ az aks get-credentials -g $RGNAME -n $AKSNAME
 
 # Use Helm to deploy a traefik ingress controller
 echo "helm repo add && helm repo update"
-$HELMDIR/helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+$HELMDIR/helm repo add stable https://charts.helm.sh/stable
 $HELMDIR/helm repo update
 
 echo ""
