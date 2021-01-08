@@ -156,12 +156,8 @@ spec:
       - name: frontend
         image: azdspublic/todo-app-frontend
         env:
-        - name: MONGO_CONNECTION_STRING
-          value: mongodb://todos-db
         - name: STATS_QUEUE_URI
           value: amqp://stats-queue
-        - name: STATS_API_HOST
-          value: stats-api
 ---
 apiVersion: v1
 kind: Service
@@ -171,6 +167,37 @@ spec:
   type: LoadBalancer
   selector:
     name: frontend
+  ports:
+  - port: 80
+    targetPort: 80
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-api
+spec:
+  selector:
+    matchLabels:
+      name: database-api
+  template:
+    metadata:
+      labels:
+        name: database-api
+    spec:
+      containers:
+      - name: database-api
+        image: azdspublic/todo-app-database-api
+        env:
+        - name: MONGO_CONNECTION_STRING
+          value: mongodb://todos-db
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: database-api
+spec:
+  selector:
+    name: database-api
   ports:
   - port: 80
     targetPort: 80

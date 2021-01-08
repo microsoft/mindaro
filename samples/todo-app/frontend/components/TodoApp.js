@@ -30,6 +30,10 @@ class TodoApp extends Component {
             body: JSON.stringify(body)
         });
 
+        if (!res.ok) {
+            throw new Error(`Failed to call API '${routeUrl}'. Make sure that 'database-api' and 'todos-db' are running properly. Details: ${res.statusText}`);
+        }
+
         const contentType = res.headers.get("content-type");
         if (contentType && contentType.indexOf("application/json") !== -1) {
             return await res.json();
@@ -54,8 +58,10 @@ class TodoApp extends Component {
     }
 
     async deleteTodo(todoToDelete) {
-        await this.callApi("DELETE", "/api/todos/" + todoToDelete._id);
-        this.getTodos();
+        const data = await this.callApi("DELETE", "/api/todos/" + todoToDelete.id, todoToDelete);
+        if (data) {
+            this.setState({ todos: data });
+        }
     };
 
     async toggleTodo(todoToToggle) {
@@ -63,8 +69,10 @@ class TodoApp extends Component {
             title: todoToToggle.title,
             completed: !todoToToggle.completed
         }
-        await this.callApi("PUT", "/api/todos/" + todoToToggle._id, updatedTodo);
-        this.getTodos();
+        const data = await this.callApi("PUT", "/api/todos/" + todoToToggle.id, updatedTodo);
+        if (data) {
+            this.setState({ todos: data });
+        }
     }
 
     handleChange(event) {
@@ -90,8 +98,8 @@ class TodoApp extends Component {
         var todoItems = todos.map((todo) => {
             return (
                 <TodoItem
-                    key={todo._id}
-                    id={todo._id}
+                    key={todo.id}
+                    id={todo.id}
                     todo={todo}
                     onToggle={() => this.toggleTodo(todo)}
                     onDestroy={() => this.deleteTodo(todo)}
