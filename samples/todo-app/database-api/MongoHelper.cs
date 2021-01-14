@@ -47,8 +47,7 @@ namespace DatabaseApi
                 }
                 catch (Exception e)
                 {
-                    Console.Error.WriteLine("Exception pinging Mongo:");
-                    Console.Error.WriteLine(e.ToString());
+                    Console.Error.WriteLine("Exception pinging Mongo: " + e.ToString());
                     Environment.Exit(1);
                 }
 
@@ -76,7 +75,11 @@ namespace DatabaseApi
         public static async Task<IEnumerable<TodoTask>> UpdateTask(string id, TodoTask updatedTask)
         {
             var tasks = GetTasks();
-            var task = tasks.First(task => task.Id == id);
+            var task = tasks.FirstOrDefault(task => task.Id == id);
+            if (task == null)
+            {
+                throw new Exception($"The TODO task of id '{id}' doesn't exist in database.");
+            }
             Console.WriteLine($"Updating TODO task '{task.Title}'");
             var db = _mongoClient.GetDatabase(_database);
             var collection = db.GetCollection<TodoTask>(_collection).WithWriteConcern(new WriteConcern("majority"));
@@ -89,7 +92,11 @@ namespace DatabaseApi
         public static async Task<IEnumerable<TodoTask>> DeleteTask(string id)
         {
             var tasks = GetTasks();
-            var task = tasks.First(task => task.Id == id);
+            var task = tasks.FirstOrDefault(task => task.Id == id);
+            if (task == null)
+            {
+                throw new Exception($"The TODO task of id '{id}' doesn't exist in database.");
+            }
             Console.WriteLine($"Deleting TODO task '{task.Title}'");
             var db = _mongoClient.GetDatabase(_database);
             var collection = db.GetCollection<TodoTask>(_collection).WithWriteConcern(new WriteConcern("majority"));

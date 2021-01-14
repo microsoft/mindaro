@@ -11,6 +11,8 @@ spec:
       labels:
         name: stats-cache
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: cache
         image: redis:5-alpine
@@ -39,6 +41,8 @@ spec:
       labels:
         name: stats-queue
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: queue
         image: rabbitmq:3-alpine
@@ -67,6 +71,8 @@ spec:
       labels:
         name: stats-worker
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: stats-worker
         image: azdspublic/todo-app-stats-worker
@@ -91,6 +97,8 @@ spec:
       labels:
         name: stats-api
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: stats-api
         image: azdspublic/todo-app-stats-api
@@ -124,6 +132,8 @@ spec:
       labels:
         name: todos-db
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: todos-db
         image: mongo:4
@@ -152,6 +162,8 @@ spec:
       labels:
         name: frontend
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: frontend
         image: azdspublic/todo-app-frontend
@@ -184,6 +196,8 @@ spec:
       labels:
         name: database-api
     spec:
+      nodeSelector:
+        kubernetes.io/os: linux
       containers:
       - name: database-api
         image: azdspublic/todo-app-database-api
