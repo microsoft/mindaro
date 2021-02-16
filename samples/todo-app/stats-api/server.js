@@ -4,11 +4,11 @@ var redis = require('redis');
 var app = express();
 
 var cache = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    host: process.env.STATS_CACHE_SERVICE_HOST,
+    port: process.env.STATS_CACHE_SERVICE_PORT,
     tls: process.env.REDIS_SSL == "true" ? {
-        host: process.env.REDIS_HOST,
-        port: process.env.REDIS_PORT,
+        host: process.env.STATS_CACHE_SERVICE_HOST,
+        port: process.env.STATS_CACHE_SERVICE_PORT,
     } : undefined,
     password: process.env.REDIS_PASSWORD || undefined
 });
