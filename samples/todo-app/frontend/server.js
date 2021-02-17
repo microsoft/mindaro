@@ -1,8 +1,6 @@
 const next = require('next');
 const express = require('express')
 const bodyParser = require("body-parser");
-const request = require('request');
-const mongodb = require("mongodb");
 const serviceBus = require('servicebus');
 const http = require('http');
 
@@ -14,26 +12,15 @@ app.prepare().then(() => {
     const server = express();
     server.use(bodyParser.json());
 
-    const mongo = mongodb.MongoClient.connect(process.env.MONGO_CONNECTION_STRING, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true
-    });
-    mongo.then(() => console.log("Connected to Mongo server"));
-    mongo.catch(reason => {
-        console.error(reason);
-        process.exit(1);
-    });
-
     server.get("/api/todos", function (req, res) {
-        mongo.then(client => {
-            const todos = client.db("todos").collection("todos");
-            todos.find({}).toArray((err, docs) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.send(docs);
-                }
-            });
+        requestData(req, process.env.DATABASE_API_SERVICE_HOST, process.env.DATABASE_API_SERVICE_PORT, '/todos', 'GET', null, (data, error) => {
+            if (error != null) {
+                res.status(500).send(error);
+                return;
+            }
+            
+            res.setHeader('Content-Type', 'application/json');
+            res.send(data);
         });
     });
 
@@ -50,77 +37,50 @@ app.prepare().then(() => {
     }
 
     server.post('/api/todos', function (req, res) {
-        console.log("POST /api/todos");
         if (!req.body) {
             res.status(400).send("missing item");
             return;
         }
-        mongo.then(client => {
-            const todos = client.db("todos").collection("todos");
-            todos.insertOne(req.body, (err, result) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else {
-                    res.status(201).send(req.body);
-                    updateStats('todo.created');
-                }
-            });
+        requestData(req, process.env.DATABASE_API_SERVICE_HOST, process.env.DATABASE_API_SERVICE_PORT, '/todos', 'POST', req.body, (data, error) => {
+            if (error != null) {
+                res.status(500).send(error);
+                return;
+            }
+            
+            res.status(201).send(data);
+            updateStats('todo.created');
         });
     });
 
     server.put("/api/todos/:id", function (req, res) {
         const id = req.params.id;
-        console.log("PUT /api/todos/" + id);
-        if (!mongodb.ObjectID.isValid(id)) {
-            res.status(400).send("invalid id");
-            return;
-        }
-        if (req.body && req.body._id) {
-            res.status(500).send({ message: "Request body should not contain '_id' field." });
-            return;
-        }
-        mongo.then(client => {
-            const todos = client.db("todos").collection("todos");
-            todos.updateOne({ _id: new mongodb.ObjectId(id) }, { $set: req.body }, (err, result) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else if (result.matchedCount == 0) {
-                    res.sendStatus(404);
-                } else {
-                    res.sendStatus(204);
-                    if (req.body.completed === true) {
-                        updateStats('todo.completed');
-                    }
-                }
-            });
+        requestData(req, process.env.DATABASE_API_SERVICE_HOST, process.env.DATABASE_API_SERVICE_PORT, '/todos?id=' + id, 'PUT', req.body, (data, error) => {
+            if (error != null) {
+                res.status(500).send(error);
+                return;
+            }
+            
+            res.send(data);
+            updateStats('todo.completed');
         });
     });
 
     server.delete("/api/todos/:id", function (req, res) {
         const id = req.params.id;
-        console.log("DELETE /api/todos/" + id);
-        if (!mongodb.ObjectID.isValid(id)) {
-            res.status(400).send("invalid id");
-            return;
-        }
-        mongo.then(client => {
-            const todos = client.db("todos").collection("todos");
-            todos.deleteOne({ _id: new mongodb.ObjectId(id) }, (err, result) => {
-                if (err) {
-                    res.status(500).send(err);
-                } else if (result.deletedCount == 0) {
-                    res.sendStatus(404);
-                } else {
-                    res.sendStatus(204);
-                    updateStats('todo.deleted');
-                }
-            });
+        requestData(req, process.env.DATABASE_API_SERVICE_HOST, process.env.DATABASE_API_SERVICE_PORT, '/todos?id=' + id, 'DELETE', null, (data, error) => {
+            if (error != null) {
+                res.status(500).send(error);
+                return;
+            }
+
+            res.send(data);
+            updateStats('todo.deleted');
         });
     });
 
     server.get("/api/stats", function (req, res) {
         var options = {
-            host: process.env.STATS_API_HOST,
+            host: process.env.STATS_API_SERVICE_HOST,
             path: '/stats',
             method: 'GET'
         };
@@ -143,7 +103,7 @@ app.prepare().then(() => {
             });
         });
 
-        req.on('error', function(e) {
+        req.on('error', function (e) {
             console.log('problem with request: ' + e.message);
           });
           
@@ -176,3 +136,51 @@ app.prepare().then(() => {
         });
     });
 });
+
+function requestData(initialRequest, host, port, path, method, bodyObject, responseHandler) {
+    console.log("%s - %s:%s%s", method, host, port, path);
+    var options = {
+        host: host,
+        port: port,
+        path: path,
+        method: method,
+        headers: {'content-type': 'application/json'}
+    };
+    const routeAsValue = initialRequest.get('kubernetes-route-as');
+    if (routeAsValue) {
+        console.log('Forwarding kubernetes-route-as header value: %s', routeAsValue);
+        options.headers['kubernetes-route-as'] = routeAsValue;
+    } else {
+        console.log('No kubernetes-route-as header value to forward');
+    }
+    var newRequest = http.request(options, function(statResponse) {
+        var responseString = '';
+        //another chunk of data has been received, so append it to `responseString`
+        statResponse.on('data', function (chunk) {
+            responseString += chunk;
+        });
+        statResponse.on('end', function () {
+            console.log('Response: %s', responseString);
+            var responseObject;
+            try {
+                responseObject = JSON.parse(responseString);
+            }
+            catch (error) {
+                responseObject = null;
+            }
+            responseHandler(responseObject, null);
+        });
+    });
+
+    newRequest.on('error', function (error) {
+        console.log('Request error: ' + error);
+        responseHandler(null, error.message);
+    });
+
+    if (bodyObject != null) {
+        newRequest.ContentType = 'application/json';
+        newRequest.write(JSON.stringify(bodyObject));
+    }
+
+    newRequest.end();
+}
