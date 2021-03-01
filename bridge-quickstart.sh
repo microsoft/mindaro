@@ -1,18 +1,18 @@
 #!/bin/bash
 set -e
 
-# Please install the below pre-requisites if using this on your local machine, or alternately, you can just use azure bash cloudshell for a seamless experience.
+# Please install the below pre-requisites if using this on your local machine, or alternately, you can just use Azure Cloud Shell for a seamless experience.
 #1. azure cli    :   https://docs.microsoft.com/en-us/cli/azure/install-azure-cli?view=azure-cli-latest
 #2. kubectl      :   https://kubernetes.io/docs/tasks/tools/install-kubectl/
 #3. curl
 #4. gunzip
 #5. tar
 
-HELMDIR=/var/tmp/helm_lpk
+HELMDIR=/var/tmp/helm_bridge
 INGRESSNAME=bikesharing-traefik
 
 echo ""
-echo "Local Process for Kubernetes"
+echo "Bridge to Kubernetes"
 echo "Bike Sample App - Quickstart script"
 echo "-----------------------------------"
 echo ""
@@ -125,7 +125,7 @@ az aks get-credentials -g $RGNAME -n $AKSNAME
 
 # Use Helm to deploy a traefik ingress controller
 echo "helm repo add && helm repo update"
-$HELMDIR/helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+$HELMDIR/helm repo add stable https://charts.helm.sh/stable
 $HELMDIR/helm repo update
 
 echo ""
@@ -160,8 +160,8 @@ echo "helm install bikesharingapp (average time to install = 4 minutes)"
 $HELMDIR/helm install bikesharingapp "$CHARTDIR" \
    --set bikesharingweb.ingress.hosts={$BIKENS.bikesharingweb.$NIPIOFQDN} \
    --set gateway.ingress.hosts={$BIKENS.gateway.$NIPIOFQDN} \
-   --set bikesharingweb.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
-   --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"="traefik" \
+   --set bikesharingweb.ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
+   --set gateway.ingress.annotations."kubernetes\.io/ingress\.class"=traefik \
    --dependency-update \
    --namespace $BIKENS \
    --timeout 9m \

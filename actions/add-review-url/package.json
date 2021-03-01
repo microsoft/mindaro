@@ -11,7 +11,7 @@
     "comment",
     "graphql"
   ],
-  "author": "Azure Dev Spaces",
+  "author": "Bridge to Kubernetes",
   "license": "MIT",
   "homepage": "https://github.com/azure/dev-spaces/actions/add-review-url-ts#readme",
   "dependencies": {

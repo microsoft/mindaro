@@ -10,7 +10,7 @@
                 "debug"
             ],
             "port": 9229,
-            "preLaunchTask": "local-process-with-kubernetes.service"
+            "preLaunchTask": "bridge-to-kubernetes.service"
         },
         {
             "type": "node",

@@ -51,7 +51,8 @@ jobs:
           echo ::set-output name=result::$release
     - uses: azure/k8s-bake@v1
       with:
-          renderEngine: 'helm2'
+          renderEngine: 'helm'
+          helm-version: 'v3.3.1'
           helmChart: './samples/BikeSharingApp/Bikes/charts/bikes/'
           releaseName: ${{steps.generate-release-name.outputs.result}}
           overrides: |
@@ -73,7 +74,7 @@ jobs:
         kubectl label pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-from=bikes -n ${{ secrets.MASTER_SPACE }} --overwrite=true
         kubectl annotate pods --selector="app=bikes,release=${{steps.generate-release-name.outputs.result}}" routing.visualstudio.io/route-on-header=kubernetes-route-as=${{steps.generate-valid-branch-name.outputs.result}} -n ${{ secrets.MASTER_SPACE }} --overwrite=true
  
-    - uses: microsoft/mindaro/actions/add-review-url@s-tuli/add-review-url_update
+    - uses: microsoft/mindaro/actions/add-review-url@Releases/v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
         host: ${{ secrets.HOST }}

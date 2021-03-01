@@ -1,0 +1,7 @@
+.dockerignore
+.gitignore
+.queues
+.vscode
+Dockerfile
+node_modules
+README.md
