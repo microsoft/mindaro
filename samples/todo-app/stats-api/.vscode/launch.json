@@ -3,6 +3,17 @@
     "configurations": [
         {
             "type": "node-terminal",
+            "name": "Run Script: dev with Kubernetes",
+            "request": "launch",
+            "command": "npm run dev",
+            "cwd": "${workspaceFolder}",
+            "preLaunchTask": "bridge-to-kubernetes.service",
+            "env": {
+                "GRPC_DNS_RESOLVER": "native"
+            }
+        },
+        {
+            "type": "node-terminal",
             "name": "Run Script: dev",
             "request": "launch",
             "command": "npm run dev",
