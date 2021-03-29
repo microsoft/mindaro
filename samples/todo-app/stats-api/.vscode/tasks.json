@@ -1,17 +1,5 @@
 {
     "version": "2.0.0",
     "tasks": [
-        {
-            "label": "bridge-to-kubernetes.service",
-            "type": "bridge-to-kubernetes.service",
-            "service": "stats-api",
-            "ports": [
-                3001
-            ],
-            "targetCluster": "pragmeaks77-rbac",
-            "targetNamespace": "kdo",
-            "useKubernetesServiceEnvironmentVariables": false,
-            "isolateAs": "pragme-1ac3"
-        }
     ]
 }

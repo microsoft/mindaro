@@ -101,7 +101,7 @@ spec:
         kubernetes.io/os: linux
       containers:
       - name: stats-api
-        image: murph15/stats-api:hello1 #azdspublic/todo-app-stats-api
+        image: azdspublic/todo-app-stats-api
         readinessProbe:
           failureThreshold: 3
           httpGet:

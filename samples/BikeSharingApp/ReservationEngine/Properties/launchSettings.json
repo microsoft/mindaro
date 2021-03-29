@@ -20,10 +20,6 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
-    },
-    "Bridge to Kubernetes": {
-      "commandName": "AzureDevSpacesLocal",
-      "launchBrowser": true
     }
   }
 }
