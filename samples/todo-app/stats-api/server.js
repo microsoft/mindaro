@@ -13,11 +13,6 @@ var cache = redis.createClient({
     password: process.env.REDIS_PASSWORD || undefined
 });
 
-app.get('/hello', function(req, res) {
-    console.log('hello request!');
-    res.status(200).send('hello!\n');
-})
-
 app.get('/stats', function (req, res) {
     console.log('request for stats received with kubernetes-route-as header: %s', req.get('kubernetes-route-as'));
     cache.get('todosCreated', function (err, created) {
