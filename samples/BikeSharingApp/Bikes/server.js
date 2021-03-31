@@ -12,7 +12,8 @@ var async = require('async');
 var mongoDBDatabase = process.env.mongo_database || "admin";
 var mongoDBCollection = process.env.mongo_collection || "bikes";
 var mongoDBConnStrHost = process.env.mongo_connectionstring || "mongodb://databases-mongo";
-var mongoDBConnStr = mongoDBConnStrHost + ":" + process.env.DATABASES_MONGO_SERVICE_PORT;
+var mongoDBConnStrPort = process.env.DATABASES_MONGO_SERVICE_PORT || 27017; //27017 is the default port for mongo
+var mongoDBConnStr = mongoDBConnStrHost + ":" + mongoDBConnStrPort;
 console.log("Database: " + mongoDBDatabase);
 console.log("Collection: " + mongoDBCollection);
 console.log("MongoDB connection string: " + mongoDBConnStr);
