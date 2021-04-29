@@ -102,6 +102,18 @@ spec:
       containers:
       - name: stats-api
         image: azdspublic/todo-app-stats-api
+        livenessProbe:
+          httpGet:
+            path: /hello
+            port: 80
+          initialDelaySeconds: 5
+          periodSeconds: 3
+        readinessProbe:
+          httpGet:
+            path: /hello
+            port: 80
+          initialDelaySeconds: 15
+          periodSeconds: 5
 ---
 apiVersion: v1
 kind: Service
