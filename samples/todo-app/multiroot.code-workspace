@@ -1,0 +1,23 @@
+{
+	"folders": [
+		{
+			"path": "frontend"
+		},
+		{
+			"path": "stats-api"
+		}
+	],
+	"launch": {
+		"version": "0.2.0",
+		"compounds": [
+			{
+				"name": "Multi-launch frontend and stats-api",
+				"configurations": [
+					"Run Script: frontend with Kubernetes",
+					"Run Script: stats-api with Kubernetes"
+				]
+			}
+		]
+	},
+	"settings": {}
+}
