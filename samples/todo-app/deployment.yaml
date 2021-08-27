@@ -208,9 +208,6 @@ spec:
       containers:
       - name: database-api
         image: azdspublic/todo-app-database-api
-        env:
-        - name: MONGO_CONNECTION_STRING
-          value: mongodb://todos-db
 ---
 apiVersion: v1
 kind: Service
