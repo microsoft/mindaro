@@ -25,7 +25,7 @@
     "async": "^2.1.5"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.15"
   },
   "bugs": {
     "url": "https://github.com/microsoft/mindaro/issues"
