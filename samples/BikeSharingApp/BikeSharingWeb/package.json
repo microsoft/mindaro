@@ -5,16 +5,16 @@
   "main": "server.js",
   "dependencies": {
     "express": "^4.17.2",
-    "isomorphic-fetch": "^2.2.1",
-    "next": "^9.5.5",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "isomorphic-fetch": "^3.0.0",
+    "next": "^12.0.8",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
     "react-rating": "^1.6.2",
     "react-responsive": "^6.0.1",
     "universal-cookie": "^3.0.7"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.15"
   },
   "scripts": {
     "dev": "nodemon server.js -w server.js -w server -w universal -w next.config.js -w config.js -w package.json",
