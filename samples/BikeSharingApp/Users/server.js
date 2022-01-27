@@ -92,7 +92,6 @@ function execSelect(statement, callbackReturnResult) {
     var request = new Request(sqlStatement, function (err, rowCount) {
         if (err) {
             console.log('Statement failed: ' + err);
-            callbackAffectedRows(rowCount, err);
         }
         if (rowCount == 0) {
             callbackReturnResult(null);
@@ -249,6 +248,7 @@ function trySqlConnect(callback) {
         console.error('Lost SQL connection! Shutting down.');
         process.exit(1);
     });
+    dbConnection.connect();
 }
 
 async.retry({times: 20, interval: 1000}, trySqlConnect, function(err) {

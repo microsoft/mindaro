@@ -397,14 +397,12 @@ async.retry({times: 10, interval: 1000}, tryMongoConnect, function(err, result) 
     }
 
     console.log("Connected to MongoDB");
-    mongoDB = result;
-    mongoDB.on('close', function() {
+    mongoDB = result;    
+    mongoDB.s.client.on('close', function() {
         if (mongoDB) { // SIGINT and SIGTERM
             console.log('Mongo connection closed! Shutting down.');
             process.exit(1);
-        }
-    });
-
+        }});
     // Start server
     server = app.listen(port, function () {
         console.log('Listening on port ' + port);
