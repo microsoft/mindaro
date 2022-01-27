@@ -15,14 +15,14 @@
   "author": "Bridge to Kubernetes",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.14.0",
-    "morgan": "^1.8.0",
+    "express": "^4.17.2",
+    "morgan": "^1.10.0",
     "express-api-validator": "0.1.0",
-    "body-parser": "^1.16.1",
-    "validate.js": "^0.11.1",
+    "body-parser": "^1.19.1",
+    "validate.js": "^0.13.1",
     "tedious": "14.1.0",
-    "util": "0.10.3",
-    "async": "^2.1.5"
+    "util": "0.12.4",
+    "async": "^3.2.3"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"

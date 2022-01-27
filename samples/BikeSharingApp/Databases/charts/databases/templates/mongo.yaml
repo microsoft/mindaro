@@ -22,7 +22,7 @@ spec:
           claimName: {{ template "databases.fullname" . }}-mongo
       containers:
       - name: {{ .Chart.Name }}-mongo
-        image: "mongo:3.4"
+        image: "mongo:3.6"
         imagePullPolicy: IfNotPresent
         ports:
           - containerPort: 27017

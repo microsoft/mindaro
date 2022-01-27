@@ -8,6 +8,7 @@
         "options": {
             "encrypt": true,
             "useColumnNames": true,
+            "trustServerCertificate": true,
             "debug": {
                 "data": true,
                 "payload": true,
