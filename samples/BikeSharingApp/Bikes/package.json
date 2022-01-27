@@ -3,12 +3,12 @@
   "version": "0.1.0",
   "description": "Microservice for managing bikes",
   "dependencies": {
-    "async": "^2.1.5",
-    "body-parser": "^1.16.1",
-    "express": "^4.13.4",
-    "mongodb": "^3.5.2",
-    "morgan": "^1.7.0",
-    "validate.js": "^0.11.1"
+    "async": "^3.2.3",
+    "body-parser": "^1.19.1",
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1",
+    "morgan": "^1.10.0",
+    "validate.js": "^0.13.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
