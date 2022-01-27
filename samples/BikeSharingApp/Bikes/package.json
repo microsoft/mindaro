@@ -11,7 +11,7 @@
     "validate.js": "^0.11.1"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.15"
   },
   "scripts": {
     "debug": "node --nolazy server.js"

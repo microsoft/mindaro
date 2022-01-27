@@ -20,12 +20,12 @@
     "express-api-validator": "0.1.0",
     "body-parser": "^1.16.1",
     "validate.js": "^0.11.1",
-    "tedious": "4.1.1",
+    "tedious": "14.1.0",
     "util": "0.10.3",
     "async": "^2.1.5"
   },
   "devDependencies": {
-    "nodemon": "^1.18.10"
+    "nodemon": "^2.0.15"
   },
   "bugs": {
     "url": "https://github.com/microsoft/mindaro/issues"
