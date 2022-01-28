@@ -9,23 +9,27 @@ bus.on("error", err => {
 })
 
 var cache = redis.createClient({
-    host: process.env.REDIS_HOST,
-    port: process.env.REDIS_PORT,
+    socket:{
+        host:process.env.REDIS_HOST,
+        port:process.env.REDIS_PORT
+    }
 });
+cache.on('error', (err) => console.log('Redis Client Error', err));
+cache.connect();
 
-function updateStat(stat) {
+async function updateStat(stat) {
     console.log("Updating stat: " + stat);
-    cache.incr(stat);
+    await cache.incr(stat);
 }
 
-bus.listen('todo.created', function (event) {
-    updateStat('todosCreated');
+bus.listen('todo.created', async function (event) {
+    await updateStat('todosCreated');
 });
 
-bus.listen('todo.completed', function (event) {
-    updateStat('todosCompleted');
+bus.listen('todo.completed', async function (event) {
+    await updateStat('todosCompleted');
 });
 
-bus.listen('todo.deleted', function (event) {
-    updateStat('todosDeleted');
+bus.listen('todo.deleted', async function (event) {
+    await updateStat('todosDeleted');
 });
