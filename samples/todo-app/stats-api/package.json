@@ -2,11 +2,11 @@
     "name": "todo-stats-api",
     "version": "1.0.0",
     "devDependencies": {
-        "nodemon": "^2.0.4"
+        "nodemon": "^2.0.15"
     },
     "dependencies": {
-        "express": "^4.17.1",
-        "redis": "^3.1.2"
+        "express": "^4.17.2",
+        "redis": "^4.0.2"
     },
     "main": "server.js",
     "scripts": {
