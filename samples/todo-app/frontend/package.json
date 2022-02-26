@@ -9,7 +9,7 @@
         "body-parser": "^1.19.0",
         "classnames": "^2.2.6",
         "express": "^4.17.1",
-        "isomorphic-fetch": "^2.2.1",
+        "isomorphic-fetch": "^3.0.0",
         "mongodb": "^3.5.8",
         "next": "^12.1.0",
         "react": "^16.13.1",
