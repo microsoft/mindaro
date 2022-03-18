@@ -15,7 +15,8 @@
         "react": "^16.13.1",
         "react-dom": "^16.13.1",
         "request": "^2.88.2",
-        "servicebus": "^2.3.3"
+        "servicebus": "^2.3.3",
+        "styled-jsx": "^5.0.1"
     },
     "main": "server.js",
     "scripts": {
