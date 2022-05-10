@@ -11,9 +11,9 @@
         "express": "^4.17.1",
         "isomorphic-fetch": "^3.0.0",
         "mongodb": "^3.5.8",
-        "next": "^12.1.0",
-        "react": "^16.13.1",
-        "react-dom": "^16.13.1",
+        "next": "^10.2.3",
+        "react": "^17.0.2",
+        "react-dom": "^17.0.2",
         "request": "^2.88.2",
         "servicebus": "^2.3.3",
         "styled-jsx": "^5.0.1"
