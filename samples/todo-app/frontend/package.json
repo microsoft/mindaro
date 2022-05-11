@@ -2,7 +2,8 @@
     "name": "todo-frontend",
     "version": "1.0.0",
     "devDependencies": {
-        "nodemon": "^2.0.4"
+        "nodemon": "^2.0.4",
+        "webpack": "^4.46.0"
     },
     "dependencies": {
         "@zeit/next-css": "^1.0.1",
