@@ -17,12 +17,12 @@ export default class MyApp extends App {
     const { Component, pageProps } = this.props;
 
     return (
-      <Container>
+      <div>
         <Head>
             <title>Todo App Sample</title>
         </Head>
         <Component {...pageProps} />
-      </Container>
+      </div>
     );
   }
 }
