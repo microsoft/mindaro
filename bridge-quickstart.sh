@@ -125,18 +125,18 @@ az aks get-credentials -g $RGNAME -n $AKSNAME
 
 # Use Helm to deploy a traefik ingress controller
 echo "helm repo add && helm repo update"
-$HELMDIR/helm repo add stable https://charts.helm.sh/stable
+$HELMDIR/helm repo add traefik https://helm.traefik.io/traefik
 $HELMDIR/helm repo update
 
 echo ""
 echo "helm install traefik ingress controller in $BIKENS $HELMARGS"
-$HELMDIR/helm install "$INGRESSNAME-$BIKENS" stable/traefik \
+$HELMDIR/helm install "$INGRESSNAME-$BIKENS" traefik/traefik \
    --namespace $BIKENS --create-namespace \
    --set kubernetes.ingressClass=traefik \
    --set fullnameOverride=$INGRESSNAME \
    --set rbac.enabled=true \
    --set kubernetes.ingressEndpoint.useDefaultPublishedService=true \
-   --version 1.85.0 $HELMARGS
+   --version 10.20.0 $HELMARGS
 
 echo ""
 echo "Waiting for BikeSharing ingress Public IP to be assigned..."
