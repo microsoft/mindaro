@@ -15,7 +15,7 @@
   "license": "MIT",
   "homepage": "https://github.com/azure/dev-spaces/actions/add-review-url-ts#readme",
   "dependencies": {
-    "@actions/core": "^1.2.0",
+    "@actions/core": "^1.9.1",
     "@octokit/graphql": "^4.3.0"
   },
   "devDependencies": {
